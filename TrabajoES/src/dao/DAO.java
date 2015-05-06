@@ -41,4 +41,8 @@ public class DAO {
 	public static ProductoDao getProductoDao(){
 		return new ProductoDaoImpl();
 }
+	public static LocalDao getLocalDao()
+	{
+		return new LocalDaoImpl();
+	}
 }
