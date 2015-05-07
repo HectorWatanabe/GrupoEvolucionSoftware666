@@ -1,6 +1,10 @@
 package servlets;
 
 import java.io.IOException;
+import java.sql.Connection;
+import java.sql.DriverManager;
+import java.sql.Statement;
+import java.util.Vector;
 
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
@@ -9,10 +13,8 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
 import beans.LocalBean;
-import beans.ProductoBean;
 import dao.DAO;
 import dao.LocalDao;
-import dao.ProductoDao;
 
 /**
  * Servlet implementation class Local
@@ -26,7 +28,7 @@ public class Local extends HttpServlet {
      */
     public Local() {
         super();
-        // TODO Auto-generated constructor stub
+
     }
 
 	/**
@@ -34,6 +36,31 @@ public class Local extends HttpServlet {
 	 */
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		// TODO Auto-generated method stub
+				int metodo = Integer.parseInt(request.getParameter("metodo"));
+				switch(metodo)
+				{
+				case 1:
+		
+		try
+			{
+			
+			LocalDao localdao=DAO.getLocalDao();
+			Vector<LocalBean> locales= localdao.listarTodos();
+			request.setAttribute("locales", locales);
+			
+			
+			
+			
+			getServletContext().getRequestDispatcher("/Admin/locales_listar.jsp?numero=1").forward(request, response);
+			}catch(Exception e)
+			{
+			System.out.print(e.getMessage());
+			}
+		break;
+				case 2:
+					
+					break;
+				}
 	}
 
 	/**

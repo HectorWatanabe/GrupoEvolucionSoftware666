@@ -1,9 +1,11 @@
 package dao;
 
 import java.sql.Connection;
+import java.sql.ResultSet;
 import java.sql.Statement;
 import java.util.Vector;
 
+import beans.LocalBean;
 import beans.ProductoBean;
 
 public class ProductoDaoImpl extends DAO implements ProductoDao {
@@ -39,8 +41,30 @@ public class ProductoDaoImpl extends DAO implements ProductoDao {
 
 	@Override
 	public Vector<ProductoBean> listarTodos() {
-		// TODO Auto-generated method stub
-		return null;
+		Vector<ProductoBean> productos=new Vector<ProductoBean>();
+		try
+		{
+		Connection con= DAO.obtenerConexion();
+		Statement stmt= con.createStatement();
+		ResultSet rs= stmt.executeQuery("select * from productos");
+		ProductoBean producto=null;
+		while(rs.next())
+		{
+			producto=new ProductoBean();
+			producto.setId(rs.getInt("id"));
+			producto.setNproducto(rs.getString("nproducto"));
+			producto.setDescripcion(rs.getString("descripcion"));
+			producto.setCategoria_id(rs.getInt("categoria_id"));
+			producto.setPrecio(rs.getFloat("precio"));
+			productos.add(producto);
+		}
+		
+		}catch(Exception E)
+		{
+			System.out.print(E.getMessage());
+		}
+		return productos;
+
 	}
 
 	@Override

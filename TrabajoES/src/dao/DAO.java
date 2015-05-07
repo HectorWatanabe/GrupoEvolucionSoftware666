@@ -45,4 +45,8 @@ public class DAO {
 	{
 		return new LocalDaoImpl();
 	}
+	public static CategoriaDao getCategoriaDao()
+	{
+		return new CategoriaDaoImpl();
+	}
 }

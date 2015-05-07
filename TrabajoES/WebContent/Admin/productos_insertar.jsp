@@ -1,3 +1,6 @@
+
+<%@page import="beans.CategorieBean"%>
+<%@page import="java.util.Vector"%>
 <%@ page language="java" contentType="text/html; charset=ISO-8859-1"
     pageEncoding="ISO-8859-1"%>
 <!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
@@ -7,6 +10,7 @@
 <title>Delicia's Ingresar Productos</title>
 <link rel="stylesheet" type="text/css" href="<%=getServletContext().getContextPath() %>/Admin/Layout1.css" />
 </head>
+<%Vector<CategorieBean> categorias=(Vector<CategorieBean>)request.getAttribute("categorias"); %>
 <body>
 <div id="contenedor">
 	<div id="cabecera">
@@ -41,8 +45,9 @@
 		<td>Categoria:</td>
 		<td>
 			<select name="categoria_id">
-				<option value="1">Categoria 1</option>
-				<option value="2">Categoria 2</option>
+				<%for(int i=0;i<categorias.size();i++) {%>
+				<option value="<%=categorias.get(i).getId()%>"><%=categorias.get(i).getNcategoria() %></option>
+				<%} %>
 			</select>
 		</td>
 	</tr>

@@ -1,6 +1,7 @@
 package servlets;
 
 import java.io.IOException;
+import java.util.Vector;
 
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
@@ -8,7 +9,10 @@ import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
+
+import beans.CategorieBean;
 import beans.ProductoBean;
+import dao.CategoriaDao;
 import dao.DAO;
 import dao.ProductoDao;
 
@@ -32,6 +36,47 @@ public class Producto extends HttpServlet {
 	 */
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		// TODO Auto-generated method stub
+		int metodo = Integer.parseInt(request.getParameter("metodo"));
+		switch(metodo)
+		{
+		case 1:
+		try
+		{
+		
+		CategoriaDao categoriadao=DAO.getCategoriaDao();
+		Vector<CategorieBean> categorias= categoriadao.listarTodos();
+		request.setAttribute("categorias", categorias);
+		
+		
+		
+		
+		getServletContext().getRequestDispatcher("/Admin/productos_insertar.jsp").forward(request, response);
+		}catch(Exception e)
+		{
+		System.out.print(e.getMessage());
+		}
+			break;
+		
+		case 2:
+			try
+			{
+			
+			ProductoDao productodao=DAO.getProductoDao();
+			Vector<ProductoBean> productos= productodao.listarTodos();
+			request.setAttribute("productos", productos);
+			
+			
+			
+			
+			getServletContext().getRequestDispatcher("/Admin/locales_listar.jsp?numero=2").forward(request, response);
+			}catch(Exception e)
+			{
+			System.out.print(e.getMessage());
+			}
+			break;
+		
+		}
+		
 	}
 
 	/**
@@ -68,3 +113,6 @@ public class Producto extends HttpServlet {
 	}
 
 }
+
+
+/////////////////////////////////////////////////////////////////////////////
