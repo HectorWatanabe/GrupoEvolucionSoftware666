@@ -5,11 +5,12 @@ import java.sql.ResultSet;
 import java.sql.Statement;
 import java.util.Vector;
 
+import beans.CategorieBean;
 import beans.LocalBean;
 
 public class LocalDaoImpl extends DAO implements LocalDao{
 
-	public boolean borrar(int id)
+	public boolean borrar(String id)
 	{
 		boolean flag=false;
 	
@@ -17,7 +18,7 @@ public class LocalDaoImpl extends DAO implements LocalDao{
 			Connection con= DAO.obtenerConexion();
 			Statement stmt= con.createStatement();
 			
-			int filas= stmt.executeUpdate("delete from genero where id=" + id);
+			int filas= stmt.executeUpdate("delete from local where id=" + id);
 			
 			con.close();
 			
@@ -46,7 +47,7 @@ public class LocalDaoImpl extends DAO implements LocalDao{
 			+ "'"+local.getDireccion()+"', "
 			+ "'"+local.getTelefono()+"', "
 			+ "'"+local.getCorreo()+"',"
-			+ "'"+local.getDireccion()+"')");
+			+ "'"+local.getDistrito()+"')");
 
 			conexion.close();
 			
@@ -93,9 +94,63 @@ public class LocalDaoImpl extends DAO implements LocalDao{
 	}
 
 	@Override
-	public LocalBean buscarPorID(int id) {
-		// TODO Auto-generated method stub
-		return null;
+	public LocalBean obtenerid(String id) {
+		LocalBean local=null;
+		try {
+			Connection conexion = DAO.obtenerConexion();
+			Statement stmt = conexion.createStatement();
+			
+			ResultSet rs =
+					stmt.executeQuery("select * from local where id=" + id);
+			
+			if( rs.next() ){
+				local = new LocalBean();
+				local.setLocal_id( rs.getInt("id") );
+				local.setCorreo( rs.getString("correo") );
+				local.setDireccion( rs.getString("direccion") );
+				local.setNlocal( rs.getString("nlocal") );
+				local.setTelefono(Integer.parseInt( rs.getString("telefono") ));
+				local.setDistrito( rs.getString("distrito") );
+				
+			}
+		
+			
+			
+			
+		} catch (Exception e) {
+			// TODO: handle exception
+			System.out.print(e.getMessage());
+		}
+		
+		return local;
+	}
+
+	@Override
+	public boolean editar(LocalBean local) {
+			boolean flag = false;
+		
+		try {
+			Connection conexion = DAO.obtenerConexion();
+			Statement stmt = conexion.createStatement();
+			
+			int filas = stmt.executeUpdate("update local "
+					+ " set nlocal='" + local.getNlocal() + "',"
+					+ " direccion='" + local.getDireccion() + "',"
+					+ " correo='" + local.getCorreo() + "',"
+					+ " telefono='" + local.getTelefono() + "',"
+					+ " distrito='" + local.getDistrito() + "'"
+					+ " where id=" + local.getLocal_id() );
+
+			conexion.close();
+			
+			if(filas==1){
+				flag = true;
+			}
+		}catch (Exception e) {
+			// TODO: handle exception
+			System.out.print(e.getMessage());
+		}
+		return flag;
 	}
 	
 	

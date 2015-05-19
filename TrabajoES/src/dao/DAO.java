@@ -49,4 +49,12 @@ public class DAO {
 	{
 		return new CategoriaDaoImpl();
 	}
+	public static DistritoDao getDistritoDao()
+	{
+		return new DistritoDaoImpl();
+	}
+	public static UsuarioDao getUsuarioDao()
+	{
+		return new UsuarioDaoImpl();
+	}
 }

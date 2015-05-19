@@ -1,26 +1,31 @@
 body 
 {
-    font-family: Arial, Times New Roman, Verdana;
-    font-size: 11px;
-    color:  #000;
-    background: #6D6868;
+    font-family: Times New Roman;
+    font-size: 16px;
+    color:  #57312f;
+    background: #000;
+}
+#logod{
+	height: 110px;
+	width: 180px;
 }
 #contenedor
 {
     margin: 0px auto;
-    width: 1000px;   
+    width: 1250px;   
 
 }
 #cabecera
 {
     color: white;
-    background-color: black;
+    background-color: #D8681D;
     border-top-left-radius: 25px;
      border-top-right-radius: 25px;
 }
 #logo{
 	height:50px;
     margin-top: 50px;
+    margin-left: 10px;
 }
 #logo1{
     padding-left: 70px;
@@ -29,32 +34,32 @@ body
 #menuar
 {
     margin-left:  200px;
-    background-color:#737370;
+    background-color:#4D423c;
 }
 #cuerpo
 {
-    background-color: #403D3F;
+    background-color: #4D423c;
  
 }
 #menuiz
 {
     float:left;
     width:200px;
-    background-color:#403D3F;
+    background-color:#4D423c;
 }
 #contenido
 {
-    background-color:#D8D3CD;
+    background-color:#ffffff;
     float:left;
-    width: 740px !important;
-	width /**/: 750px;
+    width: 990px !important;
+	width /**/: 1000px;
     padding:30px;
 }
 #pie
 {
-    background-color:black;
+    background-color:#D8681D;
     color: white;
-    height:30px;
+    height:40px;
     text-align:center;
      border-bottom-left-radius: 25px;
      border-bottom-right-radius: 25px;
@@ -83,13 +88,13 @@ background-color: #480500;
 
     height: 40px;
     line-height:40px;
-    width: 199px !important;
+    width: 261.5px !important;
 	width : 200px;
 }
 #menuiz ul li
 {
     float:left;
-    border-bottom: 2px solid black;
+    border-top : 2px solid black;
     text-align:center;
 
     height: 40px;
@@ -101,7 +106,6 @@ background-color: #480500;
 ul, li{
     padding: 0;
     list-style: none;
-    vertical-align: baseline;
 }
 .separar
 {
@@ -113,9 +117,10 @@ ul, li{
     margin: 0;
 }
 
-h2{
-font-size: 16px;
+h1{
+font-size: 17px;
 margin-bottom:10px;
+font-family: "Lucida Sans Unicode";
 }
 p{
 	line-height:16px;
@@ -123,4 +128,44 @@ p{
 #mapa{
     width: 300px;
     height: 300px;
+}
+
+
+
+#box-table-a
+{
+	font-family: "Lucida Sans Unicode", "Lucida Grande", Sans-Serif;
+	font-size: 12px;
+	margin: auto;
+	text-align: center;
+	border-collapse: collapse;
+}
+#box-table-a th
+{
+	font-size: 13px;
+	font-weight: normal;
+	padding: 11px;
+	background: #bb5a1a;
+	border-top: 4px solid #D8681D;
+	border-bottom: 1px solid #fff;
+	color: #ffffff;
+}
+#box-table-a td
+{
+	padding: 11px;
+	background: #f0f0f0; 
+	border-bottom: 1px solid #fff;
+	color: #000000;
+	border-top: 1px solid transparent;
+}
+#box-table-a tr:hover td
+{
+	background: #d9d9d9;
+	color: #000000;
+	text-decoration: blink;
+}
+#mapa{
+    width: 400px;
+    height: 200px;
+    margin: auto;
 }

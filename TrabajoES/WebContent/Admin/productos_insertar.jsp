@@ -1,4 +1,5 @@
 
+<%@page import="beans.ProductoBean"%>
 <%@page import="beans.CategorieBean"%>
 <%@page import="java.util.Vector"%>
 <%@ page language="java" contentType="text/html; charset=ISO-8859-1"
@@ -10,17 +11,19 @@
 <title>Delicia's Ingresar Productos</title>
 <link rel="stylesheet" type="text/css" href="<%=getServletContext().getContextPath() %>/Admin/Layout1.css" />
 </head>
-<%Vector<CategorieBean> categorias=(Vector<CategorieBean>)request.getAttribute("categorias"); %>
+<%Vector<CategorieBean> categorias=(Vector<CategorieBean>)request.getAttribute("categorias");
+
+ProductoBean producto = (ProductoBean)request.getAttribute("producto");%>
 <body>
 <div id="contenedor">
 	<div id="cabecera">
-		<div id="logo"><h1 id="logo1">Delicia's</h1></div>
+		<div id="logo"><img id="logod" src="<%=getServletContext().getContextPath() %>/logo.png"></div>
 		<div id="menuar">
 			<ul>
-				<li><a href="">Menu 1</a></li>
-				<li><a href="">Menu 2</a></li>
-				<li><a href="">Menu 3</a></li>
-				<li><a href="">Menu 4</a></li>
+				<li><a href="<%=getServletContext().getContextPath() %>/Producto?metodo=2&opcion=1">Comida</a></li>
+				<li><a href="<%=getServletContext().getContextPath() %>/Categoria?metodo=1">Categorias</a></li>
+				<li><a href="<%=getServletContext().getContextPath() %>/Local?metodo=1&opcion=1">Locales</a></li>
+				<li><a href="">Usuarios</a></li>
 			</ul>
 			<div class="separar"></div>
 		</div>
@@ -29,24 +32,28 @@
 	<div id="cuerpo">
 		<div id="menuiz">
 			<ul>
-				<li><a href="">Opcion 1</a></li>
-				<li><a href="">Opcion 2</a></li>
-				<li><a href="">Opcion 3</a></li>
-				<li><a href="">Opcion 4</a></li>
+				<li><a href="">Cerrar Sesión</a></li>
+				<li><a href="">Datos Usuario</a></li>
+				<li></li>
 			</ul>
 		</div>
 		<div id="contenido">
-			
+			<%try {
+				int opcion = Integer.parseInt(request.getParameter("numero"));
+				switch(opcion)
+				{
+				case 1:%>
 			<h2> Ingresar Datos del Nuevo Producto</h2>
 			
-			<form action="<%=getServletContext().getContextPath() %>/Producto" method="post">
+			<form action="<%=getServletContext().getContextPath() %>/Producto?metodo=1" method="post">
 <table>
 	<tr>
 		<td>Categoria:</td>
 		<td>
 			<select name="categoria_id">
-				<%for(int i=0;i<categorias.size();i++) {%>
+				<%for(int i=0;i<categorias.size();i++) { %>
 				<option value="<%=categorias.get(i).getId()%>"><%=categorias.get(i).getNcategoria() %></option>
+				
 				<%} %>
 			</select>
 		</td>
@@ -69,19 +76,50 @@
 </table>
 </form>
 					
-			<% try {
-				int opcion = Integer.parseInt(request.getParameter("numero"));
-				switch(opcion)
-				{
-				case 1:%>
-					<%@include file="/Admin/mensaje.jsp"%><%
-					break;
-				
-				}
+<% break;
 
-} catch(Exception E ) {%>
+				case 2:%>
+				<h2> Editar Datos del Producto</h2>
+				
+				<form action="<%=getServletContext().getContextPath() %>/Producto?metodo=2" method="post">
+			<input type="hidden" name="id" value="<%=producto.getId() %>" >
+<table>
+	<tr>
+		<td>Categoria:</td>
+		<td>
+			<select name="categoria_id">
+				<%for(int i=0;i<categorias.size();i++) {%>
+				<option value="<%=categorias.get(i).getId()%>"><%=categorias.get(i).getNcategoria() %></option>
+				<%} %>
+			</select>
+		</td>
+	</tr>
+	<tr>
+		<td>Nombre:</td>
+		<td><input type="text" name="nproducto" value="<%=producto.getNproducto() %>" /></td>
+	</tr>
+	<tr>
+		<td>Descripción:</td>
+		<td><input type="text" name="descripcion" value="<%=producto.getDescripcion() %>" /></td>
+	</tr>
+	<tr>
+		<td>Precio:</td>
+		<td><input type="text" name="precio" value="<%=producto.getPrecio() %>" /></td>
+	</tr>
+	<tr>
+		<td colspan="2"><input type="submit" name="guardar" value="Guardar producto" /></td>
+	</tr>
+</table>
+</form>
+						
+	<% break;
+
+
+				
+				}} catch(Exception E ) {%>
 	<%@include file="/Admin/mensaje.jsp" %><%
-}%>	
+}%>		
+			
 			
 			
 			

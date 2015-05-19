@@ -9,20 +9,20 @@
 <html>
 <head>
 <meta http-equiv="Content-Type" content="text/html; charset=ISO-8859-1">
-<title>Delicia's Lista de Locales</title>
+<title>Delicia's Lista</title>
 <link rel="stylesheet" type="text/css" href="<%=getServletContext().getContextPath() %>/Admin/Layout1.css" />
 </head>
 
 <body>
 <div id="contenedor">
 	<div id="cabecera">
-		<div id="logo"><h1 id="logo1">Delicia's</h1></div>
+		<div id="logo"><img id="logod" src="<%=getServletContext().getContextPath() %>/logo.png"></div>
 		<div id="menuar">
 			<ul>
-				<li><a href="">Menu 1</a></li>
-				<li><a href="">Menu 2</a></li>
-				<li><a href="">Menu 3</a></li>
-				<li><a href="">Menu 4</a></li>
+				<li><a href="<%=getServletContext().getContextPath() %>/Producto?metodo=2&opcion=1">Comida</a></li>
+				<li><a href="<%=getServletContext().getContextPath() %>/Categoria?metodo=1">Categorias</a></li>
+				<li><a href="<%=getServletContext().getContextPath() %>/Local?metodo=1&opcion=1">Locales</a></li>
+				<li><a href="">Usuarios</a></li>
 			</ul>
 			<div class="separar"></div>
 		</div>
@@ -31,10 +31,9 @@
 	<div id="cuerpo">
 		<div id="menuiz">
 			<ul>
-				<li><a href="">Opcion 1</a></li>
-				<li><a href="">Opcion 2</a></li>
-				<li><a href="">Opcion 3</a></li>
-				<li><a href="">Opcion 4</a></li>
+				<li><a href="<%=getServletContext().getContextPath() %>/Usuario">Cerrar Sesión</a></li>
+				<li><a href="">Datos Usuario</a></li>
+				<li></li>
 			</ul>
 		</div>
 		<div id="contenido">
@@ -45,8 +44,8 @@
 				{
 				case 1:%>
 					<%Vector<LocalBean> locales=(Vector<LocalBean>)request.getAttribute("locales"); %>
-			<h2> Lista de Locales </h2>
-			<table>
+			<h1> Lista de Locales </h1>
+			<table id="box-table-a">
 				<thead>
 					<tr>
 						<th>Nombres</th>
@@ -67,22 +66,24 @@
 						<td><%=locales.get(i).getDistrito()%></td>
 						<td><%=locales.get(i).getTelefono()%></td>
 						<td><%=locales.get(i).getCorreo()%></td>
-						<td><a href="<%=getServletContext().getContextPath() %>/Local_Borrar?codigo=<%=locales.get(i).getLocal_id()%>">Borrar</a></td>
-						<td><a href="<%=getServletContext().getContextPath() %>/Local_Editar?codigo=<%=locales.get(i).getLocal_id()%>">Editar</a></td>
+						<td><a href="<%=getServletContext().getContextPath() %>/Local?metodo=2&codigo=<%=locales.get(i).getLocal_id()%>">Borrar</a></td>
+						<td><a href="<%=getServletContext().getContextPath() %>/Local?metodo=3&codigo=<%=locales.get(i).getLocal_id()%>">Editar</a></td>
 					</tr>
 					<%
 						}
 					%>
 				</tbody>
 			</table>
+			<br><br>
+			<a href="<%=getServletContext().getContextPath() %>/Distrito?metodo=1"><input type="button" value="Ingresar Local"></a>
 					
 					<%
 					break;
 					
 					case 2:%>
 					<%Vector<ProductoBean> productos=(Vector<ProductoBean>)request.getAttribute("productos"); %>
-			<h2> Lista de Productos </h2>
-			<table>
+			<h1> Lista de Productos </h1>
+			<table id="box-table-a">
 				<thead>
 					<tr>
 						<th>Nombres</th>
@@ -101,22 +102,25 @@
 						<td><%=productos.get(i).getCategoria_id() %></td>
 						<td><%=productos.get(i).getDescripcion()%></td>
 						<td><%=productos.get(i).getPrecio()%></td>
-						<td><a href="<%=getServletContext().getContextPath() %>/Local_Borrar?codigo=<%=productos.get(i).getId()%>">Borrar</a></td>
-						<td><a href="<%=getServletContext().getContextPath() %>/Local_Editar?codigo=<%=productos.get(i).getId()%>">Editar</a></td>
+						<td><a href="<%=getServletContext().getContextPath() %>/Producto?metodo=4&codigo=<%=productos.get(i).getId()%>">Borrar</a></td>
+						<td><a href="<%=getServletContext().getContextPath() %>/Producto?metodo=3&codigo=<%=productos.get(i).getId()%>">Editar</a></td>
 					</tr>
 					<%
 						}
 					%>
 				</tbody>
 			</table>
+				<br><br>
+			<a href="<%=getServletContext().getContextPath() %>/Producto?metodo=1"><input type="button" value="Ingresar Producto"></a>
+				
 					<% break;
 				
 					
 
 					case 3:%>
 					<%Vector<CategorieBean> categorias=(Vector<CategorieBean>)request.getAttribute("categorias"); %>
-			<h2> Lista de Categorias </h2>
-			<table>
+			<h1> Lista de Categorias </h1>
+			<table id="box-table-a">
 				<thead>
 					<tr>
 						<th>Nombres</th>
@@ -129,14 +133,17 @@
 					%>
 					<tr>
 						<td><%=categorias.get(i).getNcategoria()%></td>
-						<td><a href="<%=getServletContext().getContextPath() %>/Local_Borrar?codigo=<%=categorias.get(i).getId()%>">Borrar</a></td>
-						<td><a href="<%=getServletContext().getContextPath() %>/Local_Editar?codigo=<%=categorias.get(i).getId()%>">Editar</a></td>
+						<td><a href="<%=getServletContext().getContextPath() %>/Categoria?metodo=2&codigo=<%=categorias.get(i).getId()%>">Borrar</a></td>
+						<td><a href="<%=getServletContext().getContextPath() %>/Categoria?metodo=3&codigo=<%=categorias.get(i).getId()%>">Editar</a></td>
 					</tr>
 					<%
 						}
 					%>
 				</tbody>
 			</table>
+				<br><br>
+			<a href="<%=getServletContext().getContextPath() %>/Admin/locales_insertar.jsp?numero=2"><input type="button" value="Ingresar Categoria"></a>
+				
 					<% break;
 					
 				}
@@ -144,6 +151,9 @@
 } catch(Exception E ) {%>
 	<%@include file="/Admin/mensaje.jsp" %><%
 }%>	
+			
+			
+			
 			
 			
 			
