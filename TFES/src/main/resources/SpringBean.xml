@@ -1,0 +1,44 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns="http://www.springframework.org/schema/beans"
+	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	xsi:schemaLocation="http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans.xsd">
+
+
+	<bean id="iDataSource" name="nDataSource"
+		class="org.springframework.jdbc.datasource.DriverManagerDataSource">
+		<property name="driverClassName"
+			value="com.mysql.jdbc.Driver">
+		</property>
+		<property name="username" value="root"></property>
+		<property name="password" value="root"></property>
+		<property name="url"
+			value="jdbc:mysql://localhost:3306/delicia">
+		</property>
+	</bean>
+
+	
+	<bean id="iJdbcTemplate" name="nJdbcTemplate"
+		class="org.springframework.jdbc.core.JdbcTemplate">
+		<property name="dataSource" ref="nDataSource"></property>
+	</bean>
+	<bean id="iCategoriaImpl" name="nCategoriaImpl"
+		class="pe.com.service.CategoriaDaoImpl">
+		<property name="jdbcTemp" ref="nJdbcTemplate"></property>
+	</bean>
+	<bean id="iDistritoImpl" name="nDistritoImpl"
+		class="pe.com.service.DistritoDaoImpl">
+		<property name="jdbcTemp" ref="nJdbcTemplate"></property>
+	</bean>
+	<bean id="iUsuarioImpl" name="nUsuarioImpl"
+		class="pe.com.service.UsuarioDaoImpl">
+		<property name="jdbcTemp" ref="nJdbcTemplate"></property>
+	</bean>
+	<bean id="iLocalImpl" name="nLocalImpl"
+		class="pe.com.service.LocalDaoImpl">
+		<property name="jdbcTemp" ref="iJdbcTemplate"></property>
+	</bean>
+	<bean id="iProductoImpl" name="nProductoImpl"
+		class="pe.com.service.ProductoDaoImpl">
+		<property name="jdbcTemp" ref="iJdbcTemplate"></property>
+	</bean>
+</beans>
