@@ -36,7 +36,8 @@ public class LocalDaoImpl implements LocalDao{
 	@Override
 	public List<Local> listar() {
 
-		return jdbcTemp.query("select * from local", new ResultSetExtractor<List<Local>>(){
+		List<Local> locales = new ArrayList<Local>();
+		locales= jdbcTemp.query("select * from local", new ResultSetExtractor<List<Local>>(){
 			public List<Local> extractData(ResultSet rs) throws SQLException,
 			DataAccessException {
 		List<Local> locales = new ArrayList<Local>();
@@ -54,6 +55,7 @@ public class LocalDaoImpl implements LocalDao{
 		return locales;
 	}
 });
+		return locales;
 	}
 
 }

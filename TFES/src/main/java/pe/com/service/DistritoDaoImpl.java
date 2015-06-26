@@ -13,6 +13,7 @@ import pe.com.modelo.Distrito;
 
 public class DistritoDaoImpl implements DistritoDao{
 
+	
 	private JdbcTemplate jdbcTemp;
 	public void setJdbcTemp(JdbcTemplate jdbcTemp) {
 		this.jdbcTemp = jdbcTemp;
