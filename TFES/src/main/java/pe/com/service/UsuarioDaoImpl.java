@@ -18,7 +18,38 @@ private JdbcTemplate jdbcTemp;
 	public void setJdbcTemp(JdbcTemplate jdbcTemp) {
 		this.jdbcTemp = jdbcTemp;
 	}
+	@Override
+	public Usuario ingresar(String usuario, String clave) {
 	
+		if(clave=="" || usuario=="")
+		{
+			return null;
+		}
+		else{
+		return jdbcTemp.query("select * from usuario "
+				+ " where usuario='"+usuario+"' and clave='"+ MD5.crypt(clave)+"'", new ResultSetExtractor<Usuario>(){
+			public Usuario extractData(ResultSet rs) throws SQLException,
+					DataAccessException {
+				Usuario usuario = null;
+				while(rs.next()){
+					usuario = new Usuario();
+					usuario.setId(rs.getInt("id"));
+					usuario.setUsuario(rs.getString("usuario"));
+					usuario.setNusuario(rs.getString("nusuario"));
+					usuario.setAusuario(rs.getString("ausuario"));
+					usuario.setClave(rs.getString("clave"));
+					usuario.setNacimiento(rs.getInt("nacimiento"));
+					usuario.setTipo(rs.getInt("tipo"));
+					usuario.setDni(rs.getInt("dni"));
+					usuario.setDireccion(rs.getString("direccion"));
+					usuario.setTelefono(rs.getInt("telefono"));
+				}
+				return usuario;
+			}
+		});}
+		
+	
+	}
 	@Override
 	public boolean agregar(Usuario usuario) {
 		
@@ -60,6 +91,36 @@ private JdbcTemplate jdbcTemp;
 				return usuarios;
 			}
 		});
+	}
+	
+	@Override
+	public Usuario obtenerid(String Usuario) {
+		
+		
+		return jdbcTemp.query("select * from usuario where usuario='"+Usuario+"'", new ResultSetExtractor<Usuario>(){
+			public Usuario extractData(ResultSet rs) throws SQLException,
+					DataAccessException {
+				Usuario usuarios = new Usuario();
+				Usuario usuario = null;
+				while(rs.next()){
+					usuario = new Usuario();
+					usuario.setId(rs.getInt("id"));
+					usuario.setUsuario(rs.getString("usuario"));
+					usuario.setNusuario(rs.getString("nusuario"));
+					usuario.setAusuario(rs.getString("ausuario"));
+					usuario.setClave(rs.getString("clave"));
+					usuario.setNacimiento(rs.getInt("nacimiento"));
+					usuario.setTipo(rs.getInt("tipo"));
+					usuario.setDni(rs.getInt("dni"));
+					usuario.setDireccion(rs.getString("direccion"));
+					usuario.setTelefono(rs.getInt("telefono"));
+				}
+				return usuarios;
+			}
+		});
+		
+				
+				
 	}
 
 }

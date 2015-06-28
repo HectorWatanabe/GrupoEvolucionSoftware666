@@ -1,3 +1,4 @@
+<%@page import="pe.com.modelo.Usuario"%>
 <%@ page language="java" contentType="text/html; charset=ISO-8859-1"
     pageEncoding="ISO-8859-1"%>
 <%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c" %>
@@ -17,10 +18,10 @@
 		<div id="logo"><img id="logod" src="<%=getServletContext().getContextPath() %>/resources/images/logo.png"></div>
 		<div id="menuar">
 			<ul>
-				<li><a href="<%=getServletContext().getContextPath() %>/inicio/producto/listado">Comida</a></li>
-				<li><a href="<%=getServletContext().getContextPath() %>/inicio/categoria/listado">Categorias</a></li>
-				<li><a href="<%=getServletContext().getContextPath() %>/inicio/local/listado">Locales</a></li>
-				<li><a href="<%=getServletContext().getContextPath() %>/inicio/usuario/listado">Usuarios</a></li>
+			<li><a href="<%=getServletContext().getContextPath() %>/inicio/nosotros1">Nosotros</a></li>
+				<li><a href="<%=getServletContext().getContextPath() %>/inicio/local/listado1">Locales</a></li>
+				<li><a href="<%=getServletContext().getContextPath() %>/inicio/producto/listado1">La Carta</a></li>
+				<li><a href="">Pedidos</a></li>
 			</ul>
 			<div class="separar"></div>
 		</div>
@@ -29,10 +30,8 @@
 	<div id="cuerpo">
 		<div id="menuiz">
 			<ul>
-				<li><a href="<%=getServletContext().getContextPath() %>/inicio/login/cerrarsesion">Cerrar Sesión</a></li>
-				<li><a href="<%=getServletContext().getContextPath() %>/inicio/usuario/datos">Datos Usuario</a></li>
-				<li><a href="<%=getServletContext().getContextPath() %>/inicio/distrito/listado">Distritos</a></li>
-				
+				<li><a href="<%=getServletContext().getContextPath() %>/inicio/login/cerrarsesion">Cerrar Session</a></li>
+				<li><a href="<%=getServletContext().getContextPath() %>/inicio/usuario/datos">Dato Usuario</a></li>
 				<li></li>
 			</ul>
 		</div>
@@ -40,9 +39,6 @@
 			
 			
 			<h1> Lista de Productos </h1>
-			<br>
-			<a href="<%=getServletContext().getContextPath() %>/inicio/producto">Agregar Producto</a>
-			<br>
 			<table id="box-table-a">
 				<thead>
 					<tr>
@@ -50,7 +46,6 @@
 						<th>descripcion</th>
 						<th>Categoria</th>
 						<th>Precio</th>
-						<th colspan="2">Opciones</th>
 					</tr>
 				</thead>
 				<tbody>
@@ -61,8 +56,6 @@
 						<td>${producto.descripcion}</td>
 						<td>${producto.categoria_id}</td>
 						<td>${producto.precio}</td>
-						<td><a href="">Borrar</a></td>
-						<td><a href="">Editar</a></td>
 					</tr>
 					</c:forEach>
 					

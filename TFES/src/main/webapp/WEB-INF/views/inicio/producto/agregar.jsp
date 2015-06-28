@@ -9,20 +9,20 @@
 <head>
 <meta http-equiv="Content-Type" content="text/html; charset=ISO-8859-1">
 <title>Delicia's Ingresar Datos</title>
-<link rel="stylesheet" type="text/css" href="../resources/css/Layout1.css" />
+<link rel="stylesheet" type="text/css" href="<%=getServletContext().getContextPath() %>/resources/css/Layout1.css" />
 </head>
 
 
 <body>
 <div id="contenedor">
 	<div id="cabecera">
-		<div id="logo"><img id="logod" src="../resources/images/logo.png"></div>
+		<div id="logo"><img id="logod" src="<%=getServletContext().getContextPath() %>/resources/images/logo.png"></div>
 		<div id="menuar">
 			<ul>
-				<li><a href="">Comida</a></li>
-				<li><a href="">Categorias</a></li>
-				<li><a href="">Locales</a></li>
-				<li><a href="">Usuarios</a></li>
+				<li><a href="<%=getServletContext().getContextPath() %>/inicio/producto/listado">Comida</a></li>
+				<li><a href="<%=getServletContext().getContextPath() %>/inicio/categoria/listado">Categorias</a></li>
+				<li><a href="<%=getServletContext().getContextPath() %>/inicio/local/listado">Locales</a></li>
+				<li><a href="<%=getServletContext().getContextPath() %>/inicio/usuario/listado">Usuarios</a></li>
 			</ul>
 			<div class="separar"></div>
 		</div>
@@ -31,8 +31,10 @@
 	<div id="cuerpo">
 		<div id="menuiz">
 			<ul>
-				<li><a href="">Cerrar Sesión</a></li>
-				<li><a href="">Datos Usuario</a></li>
+				<li><a href="<%=getServletContext().getContextPath() %>/inicio/login/cerrarsesion">Cerrar Sesión</a></li>
+				<li><a href="<%=getServletContext().getContextPath() %>/inicio/usuario/datos">Datos Usuario</a></li>
+				<li><a href="<%=getServletContext().getContextPath() %>/inicio/distrito/listado">Distritos</a></li>
+				
 				<li></li>
 			</ul>
 		</div>

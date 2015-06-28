@@ -1,18 +1,20 @@
 <%@page import="pe.com.modelo.Usuario"%>
 <%@ page language="java" contentType="text/html; charset=ISO-8859-1"
     pageEncoding="ISO-8859-1"%>
+<%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c" %>
+
 <!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
 <html>
 <head>
 <meta http-equiv="Content-Type" content="text/html; charset=ISO-8859-1">
 <title>Delicia's </title>
-<link rel="stylesheet" type="text/css" href="../resources/css/Layout1.css" />
+<link rel="stylesheet" type="text/css" href="<%=getServletContext().getContextPath() %>/resources/css/Layout1.css" />
 </head>
-<% Usuario user=(Usuario)request.getSession().getAttribute("usuario"); %>
+
 <body>
 <div id="contenedor">
 	<div id="cabecera">
-		<div id="logo"><img id="logod" src="../resources/images/logo.png"></div>
+		<div id="logo"><img id="logod" src="<%=getServletContext().getContextPath() %>/resources/images/logo.png"></div>
 		<div id="menuar">
 			<ul>
 				<li><a href="<%=getServletContext().getContextPath() %>/inicio/producto/listado">Comida</a></li>
@@ -27,14 +29,51 @@
 	<div id="cuerpo">
 		<div id="menuiz">
 			<ul>
-				<li><a href="<%=getServletContext().getContextPath() %>/inicio/login/cerrarsesion">Cerrar Sesion</a></li>
+				<li><a href="<%=getServletContext().getContextPath() %>/inicio/login/cerrarsesion">Cerrar Sesión</a></li>
 				<li><a href="<%=getServletContext().getContextPath() %>/inicio/usuario/datos">Datos Usuario</a></li>
 				<li><a href="<%=getServletContext().getContextPath() %>/inicio/distrito/listado">Distritos</a></li>
+				
 				<li></li>
 			</ul>
 		</div>
 		<div id="contenido">
-		<h1>Bienvenido <%=user.getUsuario() %></h1>
+			
+			
+			<h1> Datos Usuario</h1>
+			<% Usuario user =(Usuario)request.getSession().getAttribute("usuario"); %>
+			
+			<table>
+			<tr>
+				<td>Usuario:</td>
+				<td><%=user.getUsuario() %></td>
+			</tr>
+			<tr>
+				<td>Nombre del Usuario:</td>
+				<td> <%=user.getNusuario() %></td>
+			</tr>
+			<tr>
+				<td>Apellido del Usuario:</td>
+				<td><%=user.getAusuario() %></td>
+			</tr>
+			<tr>
+				<td>Fecha Nacimiento:</td>
+				<td><%=user.getNacimiento() %></td>
+			</tr>
+			<tr>
+				<td>DNI:</td>
+				<td> <%=user.getDni() %></td>
+			</tr>
+			<tr>
+				<td>Telefono:</td>
+				<td> <%=user.getTelefono() %></td>
+			</tr>
+			<tr>
+				<td>Direccion:</td>
+				<td><%=user.getDireccion() %></td>
+			</tr>
+			</table>
+						
+						
 		</div>
 		<div class="separar"></div>
 	</div>

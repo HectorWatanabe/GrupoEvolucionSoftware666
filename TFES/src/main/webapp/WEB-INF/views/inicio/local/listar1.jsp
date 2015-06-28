@@ -1,15 +1,13 @@
+<%@page import="pe.com.modelo.Usuario"%>
 <%@ page language="java" contentType="text/html; charset=ISO-8859-1"
     pageEncoding="ISO-8859-1"%>
-<%@ taglib uri="http://www.springframework.org/tags/form" prefix="form" %>
-  
-
-
+<%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c" %>
 
 <!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
 <html>
 <head>
 <meta http-equiv="Content-Type" content="text/html; charset=ISO-8859-1">
-<title>Delicia's Ingresar Datos</title>
+<title>Delicia's Lista</title>
 <link rel="stylesheet" type="text/css" href="<%=getServletContext().getContextPath() %>/resources/css/Layout1.css" />
 </head>
 
@@ -40,52 +38,42 @@
 		</div>
 		<div id="contenido">
 			
-			
-				
-				<h2> Agregar Usuarios</h2>
-			
-				<form:form action="usuario/agregar" method="post">
-				<table>
+			<h1> Lista de Locales </h1>
+			<table id="box-table-a">
+				<thead>
 					<tr>
-						<td>Usuario:</td>
-						<td><form:input path="usuario" /></td>
+						<th>N°</th>
+						<th>Local</th>
+						<th>Direccion</th>
+						<th>Telefono</th>
+						<th>Correo</th>
+						<th>Distrito</th>
 					</tr>
+				</thead>
+				<tbody>
+					<% int num=1; %>
+					<c:forEach items="${locales}" var="local">
 					<tr>
-						<td>Nombre del Usuario:</td>
-						<td><form:input path="nusuario" /></td>
+						<td><%=num %></td>
+						<td>${local.nlocal}</td>
+						<td>${local.direccion}</td>
+						<td>${local.telefono}</td>
+						<td>${local.correo}</td>
+						<td>${local.distrito}</td>	
 					</tr>
-					<tr>
-						<td>Apellido del Usuario:</td>
-						<td><form:input path="ausuario" /></td>
-					</tr>
-					<tr>
-						<td>Clave:</td>
-						<td><form:password path="clave" maxlength="6"/></td>
-					</tr>
-					<tr>
-						<td>Nacimiento:</td>
-						<td><form:input path="nacimiento" /></td>
-					</tr>
-					<tr>
-						<td>Dni:</td>
-						<td><form:input path="dni" maxlength="8" /></td>
-					</tr>
-					<tr>
-						<td>Direccion:</td>
-						<td><form:input path="direccion" /></td>
-					</tr>
-					<tr>
-						<td>Telefono:</td>
-						<td><form:input path="telefono" maxlength="9" /></td>
-					</tr>
+					<% num=num+1; %>	
+					</c:forEach>
 					
-					<tr>
-						<td colspan="2"><input type="submit" name="btnGuardar" value="Registro" /></td>
-					</tr>
-				</table>
-				</form:form>		
-										
-		
+					
+					
+				</tbody>
+			</table>
+					
+			
+			
+			
+			
+			
 		</div>
 		<div class="separar"></div>
 	</div>
@@ -94,5 +82,4 @@
 </div>
 </body>
 </html>
-
 

@@ -15,10 +15,8 @@
 		<div id="logo"><img id="logod" src="<%=getServletContext().getContextPath() %>/resources/images/logo.png"></div>
 		<div id="menuar">
 			<ul>
-			<li><a href="<%=getServletContext().getContextPath() %>/inicio/nosotros1">Nosotros</a></li>
-				<li><a href="<%=getServletContext().getContextPath() %>/inicio/local/listado1">Locales</a></li>
-				<li><a href="<%=getServletContext().getContextPath() %>/inicio/producto/listado1">La Carta</a></li>
-				<li><a href="">Pedidos</a></li>
+			<li><a href="<%=getServletContext().getContextPath() %>/inicio/nosotros1">Inicio</a></li>
+				<li><a href="<%=getServletContext().getContextPath() %>/inicio/pedido/listado">Pedidos</a></li>
 			</ul>
 			<div class="separar"></div>
 		</div>

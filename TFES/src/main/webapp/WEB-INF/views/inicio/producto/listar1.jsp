@@ -1,18 +1,15 @@
 <%@ page language="java" contentType="text/html; charset=ISO-8859-1"
     pageEncoding="ISO-8859-1"%>
-<%@ taglib uri="http://www.springframework.org/tags/form" prefix="form" %>
-  
-
+<%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c" %>
 
 
 <!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
 <html>
 <head>
 <meta http-equiv="Content-Type" content="text/html; charset=ISO-8859-1">
-<title>Delicia's Ingresar Datos</title>
+<title>Delicia's Lista</title>
 <link rel="stylesheet" type="text/css" href="<%=getServletContext().getContextPath() %>/resources/css/Layout1.css" />
 </head>
-
 
 <body>
 <div id="contenedor">
@@ -41,51 +38,37 @@
 		<div id="contenido">
 			
 			
-				
-				<h2> Agregar Usuarios</h2>
-			
-				<form:form action="usuario/agregar" method="post">
-				<table>
+			<h1> Lista de Productos </h1>
+			<table id="box-table-a">
+				<thead>
 					<tr>
-						<td>Usuario:</td>
-						<td><form:input path="usuario" /></td>
+						<th>Producto</th>
+						<th>descripcion</th>
+						<th>Categoria</th>
+						<th>Precio</th>
 					</tr>
-					<tr>
-						<td>Nombre del Usuario:</td>
-						<td><form:input path="nusuario" /></td>
-					</tr>
-					<tr>
-						<td>Apellido del Usuario:</td>
-						<td><form:input path="ausuario" /></td>
-					</tr>
-					<tr>
-						<td>Clave:</td>
-						<td><form:password path="clave" maxlength="6"/></td>
-					</tr>
-					<tr>
-						<td>Nacimiento:</td>
-						<td><form:input path="nacimiento" /></td>
-					</tr>
-					<tr>
-						<td>Dni:</td>
-						<td><form:input path="dni" maxlength="8" /></td>
-					</tr>
-					<tr>
-						<td>Direccion:</td>
-						<td><form:input path="direccion" /></td>
-					</tr>
-					<tr>
-						<td>Telefono:</td>
-						<td><form:input path="telefono" maxlength="9" /></td>
-					</tr>
+				</thead>
+				<tbody>
 					
+					<c:forEach items="${productos}" var="producto">
 					<tr>
-						<td colspan="2"><input type="submit" name="btnGuardar" value="Registro" /></td>
+						<td>${producto.nproducto}</td>
+						<td>${producto.descripcion}</td>
+						<td>${producto.categoria_id}</td>
+						<td>${producto.precio}</td>
 					</tr>
-				</table>
-				</form:form>		
-										
-		
+					</c:forEach>
+					
+					
+					
+				</tbody>
+			</table>
+					
+			
+			
+			
+			
+			
 		</div>
 		<div class="separar"></div>
 	</div>
@@ -94,5 +77,3 @@
 </div>
 </body>
 </html>
-
-

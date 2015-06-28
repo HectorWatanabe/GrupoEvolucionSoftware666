@@ -7,19 +7,19 @@
 <head>
 <meta http-equiv="Content-Type" content="text/html; charset=ISO-8859-1">
 <title>Delicia's Registrar Usuario</title>
-<link rel="stylesheet" type="text/css" href="<%=getServletContext().getContextPath() %>/Admin/Layout1.css" />
+<link rel="stylesheet" type="text/css" href="<%=getServletContext().getContextPath() %>/resources/css/Layout1.css" />
 </head>
-<%String mensaje = (String)request.getAttribute("mensaje"); %>
+
 <body>
 <div id="contenedor">
 	<div id="cabecera">
-		<div id="logo"><img id="logod" src="<%=getServletContext().getContextPath() %>/logo.png"></div>
+		<div id="logo"><img id="logod" src="<%=getServletContext().getContextPath() %>/resources/images/logo.png"></div>
 		<div id="menuar">
 			<ul>
-				<li><a href="<%=getServletContext().getContextPath() %>/Admin/vista_general.jsp?numero=3">Nosotros</a></li>
-				<li><a href="<%=getServletContext().getContextPath() %>/Local?metodo=1&opcion=3">Locales</a></li>
-				<li><a href="<%=getServletContext().getContextPath() %>/Producto?metodo=2&opcion=3">La Carta</a></li>
-				<li><a href="">Promociones</a></li>
+				<li><a href="<%=getServletContext().getContextPath() %>/inicio/nosotros1">Nosotros</a></li>
+				<li><a href="<%=getServletContext().getContextPath() %>/inicio/local/listado1">Locales</a></li>
+				<li><a href="<%=getServletContext().getContextPath() %>/inicio/producto/listado1">La Carta</a></li>
+				<li><a href="<%=getServletContext().getContextPath() %>/inicio/producto/promo">Promociones</a></li>
 			</ul>
 			<div class="separar"></div>
 		</div>
@@ -28,16 +28,16 @@
 	<div id="cuerpo">
 		<div id="menuiz">
 			<ul>
-				<li><a href="<%=getServletContext().getContextPath() %>/Admin/usuario_insertar.jsp?numero=1">Registrar</a></li>
-				<li><a href="<%=getServletContext().getContextPath() %>/Admin/usuario_insertar.jsp?numero=2">Ingresar</a></li>
+				<li><a href="<%=getServletContext().getContextPath() %>/inicio/usuario">Registrar</a></li>
+				<li><a href="<%=getServletContext().getContextPath() %>/inicio/login">Ingresar</a></li>
 				<li></li>
 
 			</ul>
 		</div>
 		<div id="contenido">
 							
-		<h2>Inicio de sesión</h2>
-			<form:form action="inicio/login" method="post">
+		<h2>Inicio de sesion</h2>
+			<form:form action="login" method="post">
 			
 			<table>
 	<tr>
@@ -46,15 +46,15 @@
 	</tr>
 	<tr>
 		<td>Clave:</td>
-		<td><form:input path="clave" maxlength="6"/></td>
+		<td><form:password path="clave" maxlength="6"/></td>
 	</tr>
 	</table>
 			
 			
 			
-			<% if(mensaje != null){ %>
-			<p><%=mensaje%></p>
-			<% } %>
+		
+			<p class="mensajeerror">${mensaje}</p>
+		
 			<p><input type="submit" name="ingresar" value="Ingresar" /></p>
 			</form:form>
 

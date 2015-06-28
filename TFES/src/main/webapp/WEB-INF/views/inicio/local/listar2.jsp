@@ -16,10 +16,10 @@
 		<div id="logo"><img id="logod" src="<%=getServletContext().getContextPath() %>/resources/images/logo.png"></div>
 		<div id="menuar">
 			<ul>
-				<li><a href="<%=getServletContext().getContextPath() %>/inicio/producto/listado">Comida</a></li>
-				<li><a href="<%=getServletContext().getContextPath() %>/inicio/categoria/listado">Categorias</a></li>
-				<li><a href="<%=getServletContext().getContextPath() %>/inicio/local/listado">Locales</a></li>
-				<li><a href="<%=getServletContext().getContextPath() %>/inicio/usuario/listado">Usuarios</a></li>
+			<li><a href="<%=getServletContext().getContextPath() %>/inicio/nosotros1">Nosotros</a></li>
+				<li><a href="<%=getServletContext().getContextPath() %>/inicio/local/listado1">Locales</a></li>
+				<li><a href="<%=getServletContext().getContextPath() %>/inicio/producto/listado1">La Carta</a></li>
+				<li><a href="">Pedidos</a></li>
 			</ul>
 			<div class="separar"></div>
 		</div>
@@ -28,35 +28,36 @@
 	<div id="cuerpo">
 		<div id="menuiz">
 			<ul>
-				<li><a href="<%=getServletContext().getContextPath() %>/inicio/login/cerrarsesion">Cerrar Sesión</a></li>
-				<li><a href="<%=getServletContext().getContextPath() %>/inicio/usuario/datos">Datos Usuario</a></li>
-				<li><a href="<%=getServletContext().getContextPath() %>/inicio/distrito/listado">Distritos</a></li>
-				
+				<li><a href="<%=getServletContext().getContextPath() %>/inicio/login/cerrarsesion">Cerrar Session</a></li>
+				<li><a href="<%=getServletContext().getContextPath() %>/inicio/usuario/datos">Dato Usuario</a></li>
 				<li></li>
 			</ul>
 		</div>
 		<div id="contenido">
 			
 			
-			<h1> Lista de Categorias </h1>
-			<a href="<%=getServletContext().getContextPath() %>/inicio/categoria">Agregar Categoria</a>
+			<h1> Lista de Locales </h1>
 			<table id="box-table-a">
 				<thead>
 					<tr>
 						<th>N°</th>
-						<th>Categoria</th>
-						<th colspan="2">Opciones</th>
+						<th>Local</th>
+						<th>Direccion</th>
+						<th>Telefono</th>
+						<th>Correo</th>
+						<th>Distrito</th>
 					</tr>
 				</thead>
 				<tbody>
 					<% int num=1; %>
-					<c:forEach items="${categorias}" var="categoria">
+					<c:forEach items="${locales}" var="local">
 					<tr>
 						<td><%=num %></td>
-						<td> ${categoria.ncategoria}</td>
-						<td><a href="">Borrar</a></td>
-						<td><a href="">Editar</a></td>
-					
+						<td>${local.nlocal}</td>
+						<td>${local.direccion}</td>
+						<td>${local.telefono}</td>
+						<td>${local.correo}</td>
+						<td>${local.distrito}</td>	
 					</tr>
 					<% num=num+1; %>	
 					</c:forEach>
@@ -79,6 +80,4 @@
 </div>
 </body>
 </html>
-
-
 
