@@ -16,8 +16,8 @@
 		<div id="menuar">
 			<ul>
 			<li><a href="<%=getServletContext().getContextPath() %>/inicio/nosotros1">Nosotros</a></li>
-				<li><a href="<%=getServletContext().getContextPath() %>/inicio/local/listado1">Locales</a></li>
-				<li><a href="<%=getServletContext().getContextPath() %>/inicio/producto/listado1">La Carta</a></li>
+				<li><a href="<%=getServletContext().getContextPath() %>/inicio/local/listado1?tipo=0">Locales</a></li>
+				<li><a href="<%=getServletContext().getContextPath() %>/inicio/producto/listado1?tipo=0">La Carta</a></li>
 				<li><a href="">Pedidos</a></li>
 			</ul>
 			<div class="separar"></div>

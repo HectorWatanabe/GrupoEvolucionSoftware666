@@ -38,11 +38,12 @@ private JdbcTemplate jdbcTemp;
 					usuario.setNusuario(rs.getString("nusuario"));
 					usuario.setAusuario(rs.getString("ausuario"));
 					usuario.setClave(rs.getString("clave"));
-					usuario.setNacimiento(rs.getInt("nacimiento"));
+					usuario.setNacimiento(rs.getString("nacimiento"));
 					usuario.setTipo(rs.getInt("tipo"));
-					usuario.setDni(rs.getInt("dni"));
+					usuario.setDni(rs.getString("dni"));
 					usuario.setDireccion(rs.getString("direccion"));
-					usuario.setTelefono(rs.getInt("telefono"));
+					usuario.setTelefono(rs.getString("telefono"));
+					usuario.setEstado(rs.getInt("estado"));
 				}
 				return usuario;
 			}
@@ -55,9 +56,9 @@ private JdbcTemplate jdbcTemp;
 		
 		boolean flag = false;
 		
-		int filas = jdbcTemp.update("insert into usuario (usuario,nusuario,ausuario,clave,nacimiento,tipo,dni,direccion,telefono) " +
+		int filas = jdbcTemp.update("insert into usuario (usuario,nusuario,ausuario,clave,nacimiento,tipo,dni,direccion,telefono,estado) " +
 				"values('"+usuario.getUsuario()+"','"+usuario.getNusuario()+"','"+usuario.getAusuario()+"','"+ MD5.crypt(usuario.getClave())+"',"
-						+ "'"+usuario.getNacimiento()+"','1','"+usuario.getDni()+"','"+usuario.getDireccion()+"','"+usuario.getTelefono()+"')");
+						+ "'"+usuario.getNacimiento()+"','1','"+usuario.getDni()+"','"+usuario.getDireccion()+"','"+usuario.getTelefono()+"','1')");
 		
 		if(filas == 1){
 			flag = true;
@@ -81,11 +82,12 @@ private JdbcTemplate jdbcTemp;
 					usuario.setNusuario(rs.getString("nusuario"));
 					usuario.setAusuario(rs.getString("ausuario"));
 					usuario.setClave(rs.getString("clave"));
-					usuario.setNacimiento(rs.getInt("nacimiento"));
+					usuario.setNacimiento(rs.getString("nacimiento"));
 					usuario.setTipo(rs.getInt("tipo"));
-					usuario.setDni(rs.getInt("dni"));
+					usuario.setDni(rs.getString("dni"));
 					usuario.setDireccion(rs.getString("direccion"));
-					usuario.setTelefono(rs.getInt("telefono"));
+					usuario.setTelefono(rs.getString("telefono"));
+					usuario.setEstado(rs.getInt("estado"));
 					usuarios.add(usuario);
 				}
 				return usuarios;
@@ -100,7 +102,7 @@ private JdbcTemplate jdbcTemp;
 		return jdbcTemp.query("select * from usuario where usuario='"+Usuario+"'", new ResultSetExtractor<Usuario>(){
 			public Usuario extractData(ResultSet rs) throws SQLException,
 					DataAccessException {
-				Usuario usuarios = new Usuario();
+				
 				Usuario usuario = null;
 				while(rs.next()){
 					usuario = new Usuario();
@@ -109,18 +111,76 @@ private JdbcTemplate jdbcTemp;
 					usuario.setNusuario(rs.getString("nusuario"));
 					usuario.setAusuario(rs.getString("ausuario"));
 					usuario.setClave(rs.getString("clave"));
-					usuario.setNacimiento(rs.getInt("nacimiento"));
+					usuario.setNacimiento(rs.getString("nacimiento"));
 					usuario.setTipo(rs.getInt("tipo"));
-					usuario.setDni(rs.getInt("dni"));
+					usuario.setDni(rs.getString("dni"));
 					usuario.setDireccion(rs.getString("direccion"));
-					usuario.setTelefono(rs.getInt("telefono"));
+					usuario.setTelefono(rs.getString("telefono"));
+					usuario.setEstado(rs.getInt("estado"));
 				}
-				return usuarios;
+				return usuario;
 			}
 		});
 		
 				
 				
+	}
+public Usuario obtenerUser(String id) {
+		
+		
+		return jdbcTemp.query("select * from usuario where id='"+id+"'", new ResultSetExtractor<Usuario>(){
+			public Usuario extractData(ResultSet rs) throws SQLException,
+					DataAccessException {
+				
+				Usuario usuario = null;
+				while(rs.next()){
+					usuario = new Usuario();
+					usuario.setId(rs.getInt("id"));
+					usuario.setUsuario(rs.getString("usuario"));
+					usuario.setNusuario(rs.getString("nusuario"));
+					usuario.setAusuario(rs.getString("ausuario"));
+					usuario.setClave(rs.getString("clave"));
+					usuario.setNacimiento(rs.getString("nacimiento"));
+					usuario.setTipo(rs.getInt("tipo"));
+					usuario.setDni(rs.getString("dni"));
+					usuario.setDireccion(rs.getString("direccion"));
+					usuario.setTelefono(rs.getString("telefono"));
+					usuario.setEstado(rs.getInt("estado"));
+				}
+				return usuario;
+			}
+		});
+		
+				
+				
+	}
+	@Override
+	public boolean borrar(String id) {
+		
+		Usuario user = obtenerUser(id);
+		boolean flag = false;
+		int filas=0;
+		
+			if(user.getEstado()==1)
+			{
+			 filas =  jdbcTemp.update("update usuario "
+					+ " set estado=2"
+					+ " where id=" +id );
+			}
+			else
+			{if(user.getEstado()==2){
+			 filas =  jdbcTemp.update("update usuario "
+						+ " set estado=1"
+						+ " where id=" +id );}
+			}
+
+			
+			
+			if(filas==1){
+				flag = true;
+			}
+		
+		return flag;
 	}
 
 }

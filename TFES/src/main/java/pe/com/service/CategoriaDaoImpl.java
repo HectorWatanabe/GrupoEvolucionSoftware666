@@ -31,7 +31,21 @@ private JdbcTemplate jdbcTemp;
 		
 		return flag;
 	}
-
+	@Override
+	public boolean borrar(String id) {
+		
+		
+		boolean flag=false;
+			
+			
+			int filas = jdbcTemp.update("delete from categoria where id=" + id);
+			
+			
+			if(filas==1){
+				flag = true;
+			}
+		return flag;
+	}
 	@Override
 	public List<Categoria> listar() {
 		// TODO Auto-generated method stub
@@ -50,5 +64,40 @@ private JdbcTemplate jdbcTemp;
 			}
 		});
 	}
+	@Override
+	public boolean editar(Categoria categoria) {
+			boolean flag = false;
+		
+	
+			
+			int filas = jdbcTemp.update("update categoria "
+					+ " set ncategoria='" + categoria.getNcategoria() + "'"
+					+ " where id=" + categoria.getId() );
+
+			
+			if(filas==1){
+				flag = true;
+			}
+	
+		return flag;
+	}
+	@Override
+	public Categoria obtenerid(String id) {
+			
+		return jdbcTemp.query("select * from categoria where id='"+id+"'", new ResultSetExtractor<Categoria>(){
+			public Categoria extractData(ResultSet rs) throws SQLException,
+					DataAccessException {
+				
+				Categoria categoria = null;
+				while(rs.next()){
+					categoria = new Categoria();
+					categoria.setId(rs.getInt("id"));
+					categoria.setNcategoria(rs.getString("ncategoria"));
+				}
+				return categoria;
+			}
+		});
+	}
+	
 
 }

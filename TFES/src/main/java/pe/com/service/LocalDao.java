@@ -10,5 +10,8 @@ public interface LocalDao {
 	public boolean agregar(Local local);
 	
 	public List<Local> listar();
+	public boolean borrar(String id);
+	public Local obtenerid(String id);
+	public boolean editar(Local local);
 
 }

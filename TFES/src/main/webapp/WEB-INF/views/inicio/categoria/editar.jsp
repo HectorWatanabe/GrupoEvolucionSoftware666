@@ -1,18 +1,18 @@
+<%@page import="pe.com.modelo.Categoria"%>
 <%@ page language="java" contentType="text/html; charset=ISO-8859-1"
     pageEncoding="ISO-8859-1"%>
 <%@ taglib uri="http://www.springframework.org/tags/form" prefix="form" %>
-  <%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c" %>
   
-
+  
 <!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
 <html>
 <head>
 <meta http-equiv="Content-Type" content="text/html; charset=ISO-8859-1">
-<title>Delicia's Ingresar Datos</title>
+<title>Delicia's Editar Datos</title>
 <link rel="stylesheet" type="text/css" href="<%=getServletContext().getContextPath() %>/resources/css/Layout1.css" />
 </head>
 
-
+<% Categoria categoria = (Categoria)request.getAttribute("categoria"); %>
 <body>
 <div id="contenedor">
 	<div id="cabecera">
@@ -42,34 +42,21 @@
 			
 			
 				
-				<h2> Agregar Platillo</h2>
+				<h2> Editar Categoria</h2>
 			<p class="mensajeerror">${mensaje}</p>
-				<form:form action="producto" method="post">
+				<form:form action="editar" method="post">
 				<table>
+						<tr>
+					<%if(categoria!=null) {%>	<td><input type="hidden" name="id" value="<%=categoria.getId() %>"><%} %></td>
+						</tr>	
 					<tr>
-						<td>Nombre del Producto:</td>
-						<td><form:input path="nproducto" /></td>
-					</tr>
-					<tr>
-						<td>Descripcion:</td>
-						<td><form:input path="descripcion" maxlength="200"/></td>
-					</tr>
-					<tr>
-						<td>Distrito:</td>
-						<td><form:select path="categoria_id">
-							<c:forEach items="${categorias}" var="categoria">
-							<form:option value="${categoria.id}">${categoria.ncategoria}</form:option>  
-							</c:forEach>
-			  			 	</form:select>
-			  			</td>
-					</tr>
-					<tr>
-						<td>Precio:</td>
-						<td><form:input path="precio" /></td>
+						<td>Nombre:</td>
+						<td><input type="text" name="ncategoria" <%if(categoria!=null) {%>value="<%=categoria.getNcategoria() %>"<%} %>></td>
+						
 					</tr>
 					
 					<tr>
-						<td colspan="2"><input type="submit" name="btnGuardar" value="Guardar Producto " /></td>
+						<td colspan="2"><input type="submit" name="guardar" value="Editar categoria" /></td>
 					</tr>
 				</table>
 				</form:form>		
@@ -83,5 +70,4 @@
 </div>
 </body>
 </html>
-
-
+  

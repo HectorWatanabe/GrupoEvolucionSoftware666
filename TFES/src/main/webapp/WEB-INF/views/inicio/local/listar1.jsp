@@ -19,9 +19,10 @@
 		<div id="menuar">
 			<ul>
 				<li><a href="<%=getServletContext().getContextPath() %>/inicio/nosotros1">Nosotros</a></li>
-				<li><a href="<%=getServletContext().getContextPath() %>/inicio/local/listado1">Locales</a></li>
-				<li><a href="<%=getServletContext().getContextPath() %>/inicio/producto/listado1">La Carta</a></li>
+				<li><a href="<%=getServletContext().getContextPath() %>/inicio/local/listado1?tipo=0">Locales</a></li>
+				<li><a href="<%=getServletContext().getContextPath() %>/inicio/producto/listado1?tipo=0">La Carta</a></li>
 				<li><a href="<%=getServletContext().getContextPath() %>/inicio/producto/promo">Promociones</a></li>
+				
 			</ul>
 			<div class="separar"></div>
 		</div>
@@ -32,6 +33,11 @@
 			<ul>
 				<li><a href="<%=getServletContext().getContextPath() %>/inicio/usuario">Registrar</a></li>
 				<li><a href="<%=getServletContext().getContextPath() %>/inicio/login">Ingresar</a></li>
+				<li><div style=" color: #e09125; font-weight: bolder;">Locales-Distritos</div></li>
+				<c:forEach items="${distritos}" var="distrito">
+					<li><a style=" color: #e09125; font-weight: bolder;" href="<%=getServletContext().getContextPath() %>/inicio/local/listado1?tipo=${distrito.id}">${distrito.ndistrito}</a></li>		
+									
+				</c:forEach>
 				<li></li>
 
 			</ul>
@@ -53,15 +59,56 @@
 				<tbody>
 					<% int num=1; %>
 					<c:forEach items="${locales}" var="local">
+					<c:choose>
+									<c:when test="${local.distrito==tipo}">
 					<tr>
 						<td><%=num %></td>
 						<td>${local.nlocal}</td>
 						<td>${local.direccion}</td>
 						<td>${local.telefono}</td>
 						<td>${local.correo}</td>
-						<td>${local.distrito}</td>	
+						<td>
+						<c:forEach items="${distritos}" var="distrito">
+							<c:choose>
+									<c:when test="${distrito.id==local.distrito}">
+									${distrito.ndistrito}
+									</c:when>
+								</c:choose>
+								
+							</c:forEach>
+						</td>	
 					</tr>
-					<% num=num+1; %>	
+					<% num=num+1; %>
+					</c:when>
+					
+					
+					<c:when test="${tipo==0}">
+					<tr>
+						<td><%=num %></td>
+						<td>${local.nlocal}</td>
+						<td>${local.direccion}</td>
+						<td>${local.telefono}</td>
+						<td>${local.correo}</td>
+						<td>
+						<c:forEach items="${distritos}" var="distrito">
+							
+									<c:choose>
+									<c:when test="${distrito.id==local.distrito}">
+									${distrito.ndistrito}
+									</c:when>
+								</c:choose>
+								
+							</c:forEach>
+						</td>	
+					</tr>
+					<% num=num+1; %>
+					</c:when>
+					
+					
+					
+					
+					
+					</c:choose>	
 					</c:forEach>
 					
 					

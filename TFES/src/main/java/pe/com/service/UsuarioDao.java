@@ -11,5 +11,7 @@ public interface UsuarioDao {
 	
 	public List<Usuario> listar();
 	public Usuario obtenerid(String Usuario);
+	public boolean borrar(String id);
+	public Usuario obtenerUser(String id);
 
 }

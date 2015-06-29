@@ -18,8 +18,8 @@
 		<div id="menuar">
 			<ul>
 				<li><a href="<%=getServletContext().getContextPath() %>/inicio/nosotros1">Nosotros</a></li>
-				<li><a href="<%=getServletContext().getContextPath() %>/inicio/local/listado1">Locales</a></li>
-				<li><a href="<%=getServletContext().getContextPath() %>/inicio/producto/listado1">La Carta</a></li>
+				<li><a href="<%=getServletContext().getContextPath() %>/inicio/local/listado1?tipo=0">Locales</a></li>
+				<li><a href="<%=getServletContext().getContextPath() %>/inicio/producto/listado1?tipo=0">La Carta</a></li>
 				<li><a href="<%=getServletContext().getContextPath() %>/inicio/producto/promo">Promociones</a></li>
 			</ul>
 			<div class="separar"></div>
@@ -31,6 +31,11 @@
 			<ul>
 				<li><a href="<%=getServletContext().getContextPath() %>/inicio/usuario">Registrar</a></li>
 				<li><a href="<%=getServletContext().getContextPath() %>/inicio/login">Ingresar</a></li>
+				<li><div style=" color: #e09125; font-weight: bolder;">La Carta-Categoria</div></li>
+				<c:forEach items="${categorias}" var="categoria">
+					<li><a style=" color: #e09125; font-weight: bolder;" href="<%=getServletContext().getContextPath() %>/inicio/producto/listado1?tipo=${categoria.id}">${categoria.ncategoria}</a></li>		
+									
+				</c:forEach>
 				<li></li>
 
 			</ul>
@@ -51,12 +56,46 @@
 				<tbody>
 					
 					<c:forEach items="${productos}" var="producto">
+					<c:choose>
+									<c:when test="${producto.categoria_id==tipo}">
 					<tr>
 						<td>${producto.nproducto}</td>
 						<td>${producto.descripcion}</td>
-						<td>${producto.categoria_id}</td>
+						<td>
+						
+							<c:forEach items="${categorias}" var="categoria">
+							<c:choose>
+									<c:when test="${categoria.id==producto.categoria_id}">
+									${categoria.ncategoria}
+									</c:when>
+								</c:choose>
+							</c:forEach>		
+						
+						</td>
 						<td>${producto.precio}</td>
 					</tr>
+					</c:when>
+					<c:when test="${tipo==0}">
+					<tr>
+						<td>${producto.nproducto}</td>
+						<td>${producto.descripcion}</td>
+						<td>
+						
+							<c:forEach items="${categorias}" var="categoria">
+									<c:choose>
+									<c:when test="${categoria.id==producto.categoria_id}">
+									${categoria.ncategoria}
+									</c:when>
+								</c:choose>
+							</c:forEach>		
+						
+						</td>
+						<td>${producto.precio}</td>
+					</tr>
+					</c:when>
+					
+					
+					</c:choose>	
 					</c:forEach>
 					
 					

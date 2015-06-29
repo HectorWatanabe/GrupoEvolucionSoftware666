@@ -36,6 +36,7 @@
 			
 			
 			<h1> Lista de Pedidos </h1>
+			<p class="mensajeerror">${mensaje}</p>
 			<table id="box-table-a">
 				<thead>
 					<tr>

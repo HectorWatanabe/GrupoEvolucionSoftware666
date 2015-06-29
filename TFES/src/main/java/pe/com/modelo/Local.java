@@ -5,7 +5,7 @@ public class Local {
 	private int id;
 	private String nlocal;
 	private String direccion;
-	private int telefono;
+	private String telefono;
 	private String correo;
 	private int distrito;
 	
@@ -27,10 +27,10 @@ public class Local {
 	public void setDireccion(String direccion) {
 		this.direccion = direccion;
 	}
-	public int getTelefono() {
+	public String getTelefono() {
 		return telefono;
 	}
-	public void setTelefono(int telefono) {
+	public void setTelefono(String telefono) {
 		this.telefono = telefono;
 	}
 	public String getCorreo() {

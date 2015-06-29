@@ -16,9 +16,9 @@
 		<div id="logo"><img id="logod" src="<%=getServletContext().getContextPath() %>/resources/images/logo.png"></div>
 		<div id="menuar">
 			<ul>
-				<li><a href="<%=getServletContext().getContextPath() %>/inicio/producto/listado">Comida</a></li>
+				<li><a href="<%=getServletContext().getContextPath() %>/inicio/producto/listado?tipo=0">La Carta</a></li>
 				<li><a href="<%=getServletContext().getContextPath() %>/inicio/categoria/listado">Categorias</a></li>
-				<li><a href="<%=getServletContext().getContextPath() %>/inicio/local/listado">Locales</a></li>
+				<li><a href="<%=getServletContext().getContextPath() %>/inicio/local/listado?tipo=0">Locales</a></li>
 				<li><a href="<%=getServletContext().getContextPath() %>/inicio/usuario/listado">Usuarios</a></li>
 			</ul>
 			<div class="separar"></div>
@@ -39,7 +39,9 @@
 			
 			
 			<h1> Lista de Distritos </h1>
-			<a href="<%=getServletContext().getContextPath() %>/inicio/distrito">Agregar Distrito</a>
+			
+			<p class="mensajeerror">${mensaje}</p>
+			<a class="btagregar" href="<%=getServletContext().getContextPath() %>/inicio/distrito">Agregar Distrito</a>
 			<table id="box-table-a">
 				<thead>
 					<tr>
@@ -55,8 +57,8 @@
 					<tr>
 						<td><%=num %></td>
 						<td>${distrito.ndistrito}</td>
-						<td><a href="">Borrar</a></td>
-						<td><a href="">Editar</a></td>
+						<td><a href="<%=getServletContext().getContextPath() %>/inicio/distrito/borrar?id=${distrito.id}">Borrar</a></td>
+						<td><a href="<%=getServletContext().getContextPath() %>/inicio/distrito/editar?id=${distrito.id}">Editar</a></td>
 					<% num=num+1; %>	
 					</tr>
 					

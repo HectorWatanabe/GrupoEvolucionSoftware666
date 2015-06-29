@@ -19,8 +19,8 @@
 		<div id="menuar">
 			<ul>
 			<li><a href="<%=getServletContext().getContextPath() %>/inicio/nosotros1">Nosotros</a></li>
-				<li><a href="<%=getServletContext().getContextPath() %>/inicio/local/listado1">Locales</a></li>
-				<li><a href="<%=getServletContext().getContextPath() %>/inicio/producto/listado1">La Carta</a></li>
+				<li><a href="<%=getServletContext().getContextPath() %>/inicio/local/listado1?tipo=0">Locales</a></li>
+				<li><a href="<%=getServletContext().getContextPath() %>/inicio/producto/listado1?tipo=0">La Carta</a></li>
 				<li><a href="">Pedidos</a></li>
 			</ul>
 			<div class="separar"></div>
@@ -46,11 +46,11 @@
 				<td><%=user.getUsuario() %></td>
 			</tr>
 			<tr>
-				<td>Nombre del Usuario:</td>
+				<td>Nombre:</td>
 				<td> <%=user.getNusuario() %></td>
 			</tr>
 			<tr>
-				<td>Apellido del Usuario:</td>
+				<td>Apellido:</td>
 				<td><%=user.getAusuario() %></td>
 			</tr>
 			<tr>
@@ -68,6 +68,11 @@
 			<tr>
 				<td>Direccion:</td>
 				<td><%=user.getDireccion() %></td>
+			</tr>
+			<tr>
+				<td>Estado:</td>
+				<% if(user.getEstado()==1){ %>
+				<td>Activo</td><%} else {%><td>Inactivo</td><%} %>
 			</tr>
 			</table>
 					

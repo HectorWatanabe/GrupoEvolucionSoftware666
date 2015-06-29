@@ -47,7 +47,7 @@ public class LocalDaoImpl implements LocalDao{
 			local.setId(rs.getInt("id"));
 			local.setNlocal(rs.getString("nlocal"));
 			local.setDireccion(rs.getString("direccion"));
-			local.setTelefono(rs.getInt("telefono"));
+			local.setTelefono(rs.getString("telefono"));
 			local.setCorreo(rs.getString("correo"));
 			local.setDistrito(rs.getInt("distrito"));
 			locales.add(local);
@@ -56,6 +56,64 @@ public class LocalDaoImpl implements LocalDao{
 	}
 });
 		return locales;
+	}
+
+	@Override
+	public boolean borrar(String id) {
+		boolean flag=false;
+		
+		
+		int filas = jdbcTemp.update("delete from local where id=" + id);
+		
+		
+		if(filas==1){
+			flag = true;
+		}
+	return flag;
+	}
+
+	@Override
+	public Local obtenerid(String id) {
+		return jdbcTemp.query("select * from local where id='"+id+"'", new ResultSetExtractor<Local>(){
+			public Local extractData(ResultSet rs) throws SQLException,
+					DataAccessException {
+				
+				Local local = null;
+				while(rs.next()){
+					local = new Local();
+					local.setId(rs.getInt("id"));
+					local.setNlocal(rs.getString("nlocal"));
+					local.setDireccion(rs.getString("direccion"));
+					local.setTelefono(rs.getString("telefono"));
+					local.setCorreo(rs.getString("correo"));
+					local.setDistrito(rs.getInt("distrito"));
+					
+				}
+				return local;
+			}
+		});
+	}
+
+	@Override
+	public boolean editar(Local local) {
+		boolean flag = false;
+		
+		
+		
+		int filas = jdbcTemp.update("update local "
+				+ " set nlocal='" + local.getNlocal() + "',"
+				+ " direccion='" + local.getDireccion() + "',"
+				+ " correo='" + local.getCorreo() + "',"
+				+ " telefono='" + local.getTelefono() + "',"
+				+ " distrito='" + local.getDistrito() + "'"
+				+ " where id=" + local.getId() );
+
+		
+		if(filas==1){
+			flag = true;
+		}
+
+	return flag;
 	}
 
 }

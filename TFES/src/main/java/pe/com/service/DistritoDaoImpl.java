@@ -52,4 +52,53 @@ public class DistritoDaoImpl implements DistritoDao{
 	}
 });
 	}
+
+	@Override
+	public boolean borrar(String id) {
+		boolean flag=false;
+		
+		
+		int filas = jdbcTemp.update("delete from distrito where id=" + id);
+		
+		
+		if(filas==1){
+			flag = true;
+		}
+	return flag;
+	}
+
+	@Override
+	public Distrito obtenerid(String id) {
+		return jdbcTemp.query("select * from distrito where id='"+id+"'", new ResultSetExtractor<Distrito>(){
+			public Distrito extractData(ResultSet rs) throws SQLException,
+					DataAccessException {
+				
+				Distrito distrito = null;
+				while(rs.next()){
+					distrito = new Distrito();
+					distrito.setId(rs.getInt("id"));
+					distrito.setNdistrito(rs.getString("ndistrito"));
+				}
+				return distrito;
+			}
+		});
+	}
+
+	@Override
+	public boolean editar(Distrito distrito) {
+		boolean flag = false;
+		
+		
+		
+		int filas = jdbcTemp.update("update distrito "
+				+ " set ndistrito='" + distrito.getNdistrito() + "'"
+				+ " where id=" + distrito.getId() );
+
+		
+		if(filas==1){
+			flag = true;
+		}
+
+	return flag;
+	}
 }

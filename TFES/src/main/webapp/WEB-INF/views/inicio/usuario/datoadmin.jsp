@@ -17,9 +17,9 @@
 		<div id="logo"><img id="logod" src="<%=getServletContext().getContextPath() %>/resources/images/logo.png"></div>
 		<div id="menuar">
 			<ul>
-				<li><a href="<%=getServletContext().getContextPath() %>/inicio/producto/listado">Comida</a></li>
+				<li><a href="<%=getServletContext().getContextPath() %>/inicio/producto/listado?tipo=0">La Carta</a></li>
 				<li><a href="<%=getServletContext().getContextPath() %>/inicio/categoria/listado">Categorias</a></li>
-				<li><a href="<%=getServletContext().getContextPath() %>/inicio/local/listado">Locales</a></li>
+				<li><a href="<%=getServletContext().getContextPath() %>/inicio/local/listado?tipo=0">Locales</a></li>
 				<li><a href="<%=getServletContext().getContextPath() %>/inicio/usuario/listado">Usuarios</a></li>
 			</ul>
 			<div class="separar"></div>
@@ -48,11 +48,11 @@
 				<td><%=user.getUsuario() %></td>
 			</tr>
 			<tr>
-				<td>Nombre del Usuario:</td>
+				<td>Nombre:</td>
 				<td> <%=user.getNusuario() %></td>
 			</tr>
 			<tr>
-				<td>Apellido del Usuario:</td>
+				<td>Apellido:</td>
 				<td><%=user.getAusuario() %></td>
 			</tr>
 			<tr>
@@ -70,6 +70,11 @@
 			<tr>
 				<td>Direccion:</td>
 				<td><%=user.getDireccion() %></td>
+			</tr>
+			<tr>
+				<td>Estado:</td>
+				<% if(user.getEstado()==1){ %>
+				<td>Activo</td><%} else {%><td>Inactivo</td><%} %>
 			</tr>
 			</table>
 						

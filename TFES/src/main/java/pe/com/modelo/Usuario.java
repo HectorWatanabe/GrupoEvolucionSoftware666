@@ -7,11 +7,19 @@ public class Usuario {
 	private String nusuario;
 	private String ausuario;
 	private String clave;
-	private int nacimiento;
+	private String nacimiento;
 	private int tipo;
-	private int dni;
+	private String dni;
 	private String direccion;
-	private int telefono;
+	private String telefono;
+	private int estado;
+	
+	public int getEstado() {
+		return estado;
+	}
+	public void setEstado(int estado) {
+		this.estado = estado;
+	}
 	public int getId() {
 		return id;
 	}
@@ -42,10 +50,10 @@ public class Usuario {
 	public void setClave(String clave) {
 		this.clave = clave;
 	}
-	public int getNacimiento() {
+	public String getNacimiento() {
 		return nacimiento;
 	}
-	public void setNacimiento(int nacimiento) {
+	public void setNacimiento(String nacimiento) {
 		this.nacimiento = nacimiento;
 	}
 	public int getTipo() {
@@ -54,10 +62,10 @@ public class Usuario {
 	public void setTipo(int tipo) {
 		this.tipo = tipo;
 	}
-	public int getDni() {
+	public String getDni() {
 		return dni;
 	}
-	public void setDni(int dni) {
+	public void setDni(String dni) {
 		this.dni = dni;
 	}
 	public String getDireccion() {
@@ -66,10 +74,10 @@ public class Usuario {
 	public void setDireccion(String direccion) {
 		this.direccion = direccion;
 	}
-	public int getTelefono() {
+	public String getTelefono() {
 		return telefono;
 	}
-	public void setTelefono(int telefono) {
+	public void setTelefono(String telefono) {
 		this.telefono = telefono;
 	}
 	

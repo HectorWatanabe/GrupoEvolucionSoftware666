@@ -16,6 +16,7 @@ import org.springframework.web.servlet.ModelAndView;
 import pe.com.modelo.Usuario;
 import pe.com.service.UsuarioDao;
 import pe.com.service.UsuarioDaoImpl;
+import pe.com.util.Fecha;
 @Controller
 public class UsuarioController {
 	
@@ -94,33 +95,60 @@ public class UsuarioController {
 		
 	}
 	
-	@RequestMapping(value="/inicio/usuario/agregar", method= RequestMethod.POST)
-	public String usuario(Usuario usuario, Model model,HttpServletRequest request){
-		
+	@RequestMapping(value="/inicio/usuario", method= RequestMethod.POST)
+	public ModelAndView usuario(Usuario usuario, Model model,HttpServletRequest request){
+		boolean flag=false;
 		ApplicationContext context = new ClassPathXmlApplicationContext("SpringBean.xml");
-		UsuarioDao usuariodao = (UsuarioDaoImpl)context.getBean("iUsuarioImpl");
+		UsuarioDao usuariodao = (UsuarioDaoImpl)context.getBean("iUsuarioImpl"); 
 		
-		boolean flag = usuariodao.agregar(usuario);
+		if(!usuario.getClave().matches("(?!^[0-9]*$)(?=.*[A-Z])(?!^[a-zA-Z]*$)^([a-zA-Z0-9]{6,15})$"))
+		{
+			model.addAttribute("mensaje", "La contraseña debe tener entre 6-15 caracteres, un numero y una mayuscula");
+			
+		}else
+		{
+			Fecha fecha= new Fecha();
+			if(!fecha.validate(usuario.getNacimiento()))
+			{
+				model.addAttribute("mensaje", "La Fecha de nacimiento debe ser en formato dd/mm/aaaa" );}
+			else{
+				if(!usuario.getNusuario().matches("[a-zA-Z]+")||!usuario.getAusuario().matches("[a-zA-Z]+"))
+				{
+					model.addAttribute("mensaje", "Los nombre y apellidos no deben tener numeros ni caracteres especiales o estar en blanco");
+				}else
+				{
+					if(!usuario.getDni().matches("[0-9]{8}+")||!usuario.getTelefono().matches("[0-9]{7,9}+"))
+					{
+						model.addAttribute("mensaje", "EL DNI y telefono deben ser numeros validos");
+					}else{
+						if(!usuario.getUsuario().matches("[A-Za-z0-9]+")||usuario.getUsuario()=="")
+						{
+							model.addAttribute("mensaje", "No se permiten caracteres especiales o campo vacio");
+						}
+						else{
+							flag = usuariodao.agregar(usuario);
+							if(flag){
+								model.addAttribute("mensaje", "Usuario guardado");
+							}
+							else{model.addAttribute("mensaje", "Ocurrio un Error");}}}}
 		
-		if(flag){
-			model.addAttribute("mensaje", "Usuario guardado");
-		}else{
-			model.addAttribute("mensaje", "Ocurrió un error");
 		}
+		}
+		
 		
 		Usuario user=(Usuario)request.getSession().getAttribute("usuario");
 		if(request.getSession().getAttribute("usuario")!=null)
 		{
 		if(user.getTipo()==1)
 			{
-			return "inicio/homeuser";
+			return new ModelAndView("inicio/login", "command", null);
 			}
 		if(user.getTipo()==2)
 		{
-		return "inicio/homeadmin";
+			return new ModelAndView("inicio/login", "command", null);
 		}
 		}
-			return "/inicio/mensaje1";
+		return new ModelAndView("/inicio/usuario/agregar", "command", new Usuario());
 		
 		
 	}
@@ -176,6 +204,46 @@ public class UsuarioController {
 		
 
 		
+	}
+	
+	@RequestMapping(value="/inicio/usuario/borrar", method= RequestMethod.GET)
+	public String borrar( Model model,HttpServletRequest request){
+		
+		ApplicationContext context = new ClassPathXmlApplicationContext("SpringBean.xml");
+		UsuarioDao usuariodao = (UsuarioDaoImpl)context.getBean("iUsuarioImpl");
+		
+		
+		String id =(String)request.getParameter("id");
+		boolean flag = usuariodao.borrar(id);
+		Usuario userID= usuariodao.obtenerUser(id);
+		List<Usuario> usuarios = usuariodao.listar();
+		model.addAttribute("usuarios", usuarios);
+		if(flag){
+			if(userID.getEstado()==2)
+			{
+			model.addAttribute("mensaje", "El Usuario ahora esta Inactivo");
+			}else
+			{
+				if(userID.getEstado()==1)
+				model.addAttribute("mensaje", "El Usuario ahora esta Activo");	
+			}
+		}else{
+			model.addAttribute("mensaje", "Ocurrió un error");
+		}
+		
+		Usuario user=(Usuario)request.getSession().getAttribute("usuario");
+		if(request.getSession().getAttribute("usuario")!=null)
+		{
+		if(user.getTipo()==1)
+			{
+			return "inicio/homeuser";
+			}
+		if(user.getTipo()==2)
+		{
+		return "inicio/usuario/listar";
+		}
+		}
+			return "/inicio/Home";
 	}
 	
 

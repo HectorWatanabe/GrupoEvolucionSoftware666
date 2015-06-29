@@ -21,9 +21,9 @@
 		<div id="logo"><img id="logod" src="<%=getServletContext().getContextPath() %>/resources/images/logo.png"></div>
 		<div id="menuar">
 			<ul>
-				<li><a href="<%=getServletContext().getContextPath() %>/inicio/producto/listado">Comida</a></li>
+				<li><a href="<%=getServletContext().getContextPath() %>/inicio/producto/listado?tipo=0">La Carta</a></li>
 				<li><a href="<%=getServletContext().getContextPath() %>/inicio/categoria/listado">Categorias</a></li>
-				<li><a href="<%=getServletContext().getContextPath() %>/inicio/local/listado">Locales</a></li>
+				<li><a href="<%=getServletContext().getContextPath() %>/inicio/local/listado?tipo=0">Locales</a></li>
 				<li><a href="<%=getServletContext().getContextPath() %>/inicio/usuario/listado">Usuarios</a></li>
 			</ul>
 			<div class="separar"></div>
@@ -45,8 +45,8 @@
 			
 				
 				<h2> Agregar Agregar</h2>
-			
-				<form:form action="local/agregar" method="post">
+			<p class="mensajeerror">${mensaje}</p>
+				<form:form action="local" method="post">
 				<table>
 					<tr>
 						<td>Nombre del Local:</td>
@@ -58,7 +58,7 @@
 					</tr>
 					<tr>
 						<td>Telefono:</td>
-						<td><form:input path="telefono" maxlength="7"/></td>
+						<td><form:input path="telefono" maxlength="9"/></td>
 					</tr>
 					<tr>
 						<td>Correo:</td>

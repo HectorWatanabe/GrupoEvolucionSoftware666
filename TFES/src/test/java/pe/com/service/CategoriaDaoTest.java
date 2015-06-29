@@ -71,7 +71,7 @@ public class CategoriaDaoTest {
 		local.setDistrito(1);
 		local.setCorreo("correoprueba");
 		local.setDireccion("direccionprueba");
-		local.setTelefono(1234567);
+		local.setTelefono("1234567");
 		localdaoimpl.agregar(local);
 		
 		assertEquals(num+1, localdaoimpl.listar().size());
@@ -124,10 +124,10 @@ public class CategoriaDaoTest {
 		usuario.setAusuario("ausuarioprueba");
 		usuario.setNusuario("nusuarioprueba");
 		usuario.setUsuario("usuarioprueba");
-		usuario.setDni(12345678);
+		usuario.setDni("12345678");
 		usuario.setDireccion("direccionprueba");
-		usuario.setNacimiento(1993);
-		usuario.setTelefono(123456789);
+		usuario.setNacimiento("12/11/s1993");
+		usuario.setTelefono("123456789");
 		usuario.setTipo(1);
 		usuario.setClave("claveprueba");
 		usuariodaoimpl.agregar(usuario);

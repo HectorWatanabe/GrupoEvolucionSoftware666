@@ -9,5 +9,9 @@ public interface ProductoDao {
 	public boolean agregar(Producto producto);
 	
 	public List<Producto> listar();
+	
+	public boolean borrar(String id);
+	public Producto obtenerid(String id);
+	public boolean editar(Producto producto);
 
 }

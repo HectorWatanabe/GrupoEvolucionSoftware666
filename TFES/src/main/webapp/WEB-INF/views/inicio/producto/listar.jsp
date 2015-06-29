@@ -17,9 +17,9 @@
 		<div id="logo"><img id="logod" src="<%=getServletContext().getContextPath() %>/resources/images/logo.png"></div>
 		<div id="menuar">
 			<ul>
-				<li><a href="<%=getServletContext().getContextPath() %>/inicio/producto/listado">Comida</a></li>
+				<li><a href="<%=getServletContext().getContextPath() %>/inicio/producto/listado?tipo=0">La Carta</a></li>
 				<li><a href="<%=getServletContext().getContextPath() %>/inicio/categoria/listado">Categorias</a></li>
-				<li><a href="<%=getServletContext().getContextPath() %>/inicio/local/listado">Locales</a></li>
+				<li><a href="<%=getServletContext().getContextPath() %>/inicio/local/listado?tipo=0">Locales</a></li>
 				<li><a href="<%=getServletContext().getContextPath() %>/inicio/usuario/listado">Usuarios</a></li>
 			</ul>
 			<div class="separar"></div>
@@ -32,7 +32,11 @@
 				<li><a href="<%=getServletContext().getContextPath() %>/inicio/login/cerrarsesion">Cerrar Sesión</a></li>
 				<li><a href="<%=getServletContext().getContextPath() %>/inicio/usuario/datos">Datos Usuario</a></li>
 				<li><a href="<%=getServletContext().getContextPath() %>/inicio/distrito/listado">Distritos</a></li>
-				
+				<li><div style=" color: #e09125; font-weight: bolder;">La Carta-Categoria</div></li>
+				<c:forEach items="${categorias}" var="categoria">
+					<li><a style=" color: #e09125; font-weight: bolder;" href="<%=getServletContext().getContextPath() %>/inicio/producto/listado?tipo=${categoria.id}">${categoria.ncategoria}</a></li>		
+									
+				</c:forEach>
 				<li></li>
 			</ul>
 		</div>
@@ -40,8 +44,8 @@
 			
 			
 			<h1> Lista de Productos </h1>
-			<br>
-			<a href="<%=getServletContext().getContextPath() %>/inicio/producto">Agregar Producto</a>
+			<p class="mensajeerror">${mensaje}</p>
+			<a class="btagregar" href="<%=getServletContext().getContextPath() %>/inicio/producto">Agregar Producto</a>
 			<br>
 			<table id="box-table-a">
 				<thead>
@@ -56,14 +60,50 @@
 				<tbody>
 					
 					<c:forEach items="${productos}" var="producto">
+					<c:choose>
+									<c:when test="${producto.categoria_id==tipo}">
 					<tr>
 						<td>${producto.nproducto}</td>
 						<td>${producto.descripcion}</td>
-						<td>${producto.categoria_id}</td>
+						<td>
+						
+							<c:forEach items="${categorias}" var="categoria">
+							<c:choose>
+									<c:when test="${categoria.id==producto.categoria_id}">
+									${categoria.ncategoria}
+									</c:when>
+								</c:choose>
+							</c:forEach>		
+						
+						</td>
 						<td>${producto.precio}</td>
-						<td><a href="">Borrar</a></td>
-						<td><a href="">Editar</a></td>
+						<td><a href="<%=getServletContext().getContextPath() %>/inicio/producto/borrar?id=${producto.id}">Borrar</a></td>
+						<td><a href="<%=getServletContext().getContextPath() %>/inicio/producto/editar?id=${producto.id}">Editar</a></td>
 					</tr>
+					</c:when>
+					<c:when test="${tipo==0}">
+					<tr>
+						<td>${producto.nproducto}</td>
+						<td>${producto.descripcion}</td>
+						<td>
+						
+							<c:forEach items="${categorias}" var="categoria">
+									<c:choose>
+									<c:when test="${categoria.id==producto.categoria_id}">
+									${categoria.ncategoria}
+									</c:when>
+								</c:choose>
+							</c:forEach>		
+						
+						</td>
+						<td>${producto.precio}</td>
+						<td><a href="<%=getServletContext().getContextPath() %>/inicio/producto/borrar?id=${producto.id}">Borrar</a></td>
+						<td><a href="<%=getServletContext().getContextPath() %>/inicio/producto/editar?id=${producto.id}">Editar</a></td>
+					</tr>
+					</c:when>
+					
+					
+					</c:choose>	
 					</c:forEach>
 					
 					

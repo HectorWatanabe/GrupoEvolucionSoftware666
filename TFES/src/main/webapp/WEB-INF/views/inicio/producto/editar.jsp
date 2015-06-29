@@ -1,3 +1,6 @@
+<%@page import="pe.com.modelo.Producto"%>
+<%@page import="pe.com.modelo.Categoria"%>
+<%@page import="java.util.ArrayList"%>
 <%@ page language="java" contentType="text/html; charset=ISO-8859-1"
     pageEncoding="ISO-8859-1"%>
 <%@ taglib uri="http://www.springframework.org/tags/form" prefix="form" %>
@@ -8,11 +11,13 @@
 <html>
 <head>
 <meta http-equiv="Content-Type" content="text/html; charset=ISO-8859-1">
-<title>Delicia's Ingresar Datos</title>
+<title>Delicia's Editar Datos</title>
 <link rel="stylesheet" type="text/css" href="<%=getServletContext().getContextPath() %>/resources/css/Layout1.css" />
 </head>
 
+<%ArrayList<Categoria> categorias=(ArrayList<Categoria>)request.getAttribute("categorias");
 
+Producto producto = (Producto)request.getAttribute("producto");%>
 <body>
 <div id="contenedor">
 	<div id="cabecera">
@@ -42,34 +47,37 @@
 			
 			
 				
-				<h2> Agregar Platillo</h2>
+				<h2> Editar Producto</h2>
 			<p class="mensajeerror">${mensaje}</p>
-				<form:form action="producto" method="post">
+				<form:form action="editar" method="post">
 				<table>
 					<tr>
-						<td>Nombre del Producto:</td>
-						<td><form:input path="nproducto" /></td>
+					<td><%if(producto!=null) {%><input type="hidden" name="id" value="<%=producto.getId() %>" ><%} %></td>
 					</tr>
 					<tr>
-						<td>Descripcion:</td>
-						<td><form:input path="descripcion" maxlength="200"/></td>
+						<td>Categoria:</td>
+						<td>
+							<select name="categoria_id">
+								<%for(int i=0;i<categorias.size();i++) {%>
+								<option value="<%=categorias.get(i).getId()%>"><%=categorias.get(i).getNcategoria() %></option>
+								<%} %>
+							</select>
+						</td>
 					</tr>
 					<tr>
-						<td>Distrito:</td>
-						<td><form:select path="categoria_id">
-							<c:forEach items="${categorias}" var="categoria">
-							<form:option value="${categoria.id}">${categoria.ncategoria}</form:option>  
-							</c:forEach>
-			  			 	</form:select>
-			  			</td>
+						<td>Nombre:</td>
+						<td><input type="text" name="nproducto" <%if(producto!=null) {%>value="<%=producto.getNproducto() %>"<%} %> /></td>
+					</tr>
+					<tr>
+						<td>Descripción:</td>
+						<td><input type="text" name="descripcion" <%if(producto!=null) {%>value="<%=producto.getDescripcion() %>"<%} %> /></td>
 					</tr>
 					<tr>
 						<td>Precio:</td>
-						<td><form:input path="precio" /></td>
+						<td><input type="text" name="precio" <%if(producto!=null) {%>value="<%=producto.getPrecio() %>" <%} %>/></td>
 					</tr>
-					
 					<tr>
-						<td colspan="2"><input type="submit" name="btnGuardar" value="Guardar Producto " /></td>
+						<td colspan="2"><input type="submit" name="guardar" value="Editar producto" /></td>
 					</tr>
 				</table>
 				</form:form>		

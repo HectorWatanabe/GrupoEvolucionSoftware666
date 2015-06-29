@@ -16,9 +16,9 @@
 		<div id="logo"><img id="logod" src="<%=getServletContext().getContextPath() %>/resources/images/logo.png"></div>
 		<div id="menuar">
 			<ul>
-				<li><a href="<%=getServletContext().getContextPath() %>/inicio/producto/listado">Comida</a></li>
+				<li><a href="<%=getServletContext().getContextPath() %>/inicio/producto/listado?tipo=0">La Carta</a></li>
 				<li><a href="<%=getServletContext().getContextPath() %>/inicio/categoria/listado">Categorias</a></li>
-				<li><a href="<%=getServletContext().getContextPath() %>/inicio/local/listado">Locales</a></li>
+				<li><a href="<%=getServletContext().getContextPath() %>/inicio/local/listado?tipo=0">Locales</a></li>
 				<li><a href="<%=getServletContext().getContextPath() %>/inicio/usuario/listado">Usuarios</a></li>
 			</ul>
 			<div class="separar"></div>
@@ -39,7 +39,7 @@
 			
 			
 			<h1> Lista de Usuarios </h1>
-			
+			<p class="mensajeerror">${mensaje}</p>
 			<table id="box-table-a">
 				<thead>
 					<tr>
@@ -51,11 +51,12 @@
 						<th>DNI</th>
 						<th>Telefono</th>
 						<th>Tipo de Usuario</th>
-						<th colspan="2">Opciones</th>
+						<th>Estado de Usuario</th>
+						<th >Opcion</th>
 					</tr>
 				</thead>
 				<tbody>
-					
+					<% int num=0; %>
 					<c:forEach items="${usuarios}" var="usuario">
 					<tr>
 						<td>${usuario.usuario}</td>
@@ -65,9 +66,37 @@
 						<td>${usuario.direccion}</td>
 						<td>${usuario.dni}</td>
 						<td>${usuario.telefono}</td>
-						<td>${usuario.tipo}</td>
-						<td><a href="">Borrar</a></td>
-						<td><a href="">Editar</a></td>
+						<td>
+							<c:choose>
+									<c:when test="${usuario.tipo ==1}">
+									Cliente
+									</c:when>
+									<c:when test="${usuario.tipo==2}">
+									Administrador
+									</c:when>
+									<c:when test="${usuario.tipo==3}">
+									Cocinero
+									</c:when>
+								</c:choose>
+						</td>
+						<td>  <c:choose>
+								<c:when test="${usuario.estado ==1}">
+								Activo
+								</c:when>
+								<c:when test="${usuario.estado==2}">
+								Inactivo
+								</c:when>
+							</c:choose> </td>
+						<td>
+						<c:choose>
+								<c:when test="${usuario.estado ==1}">
+								<a href="<%=getServletContext().getContextPath() %>/inicio/usuario/borrar?id=${usuario.id}">OFF</a>
+								</c:when>
+								<c:when test="${usuario.estado==2}">
+								<a href="<%=getServletContext().getContextPath() %>/inicio/usuario/borrar?id=${usuario.id}">ON</a>
+								</c:when>
+							</c:choose>
+						
 					</tr>
 					</c:forEach>
 					

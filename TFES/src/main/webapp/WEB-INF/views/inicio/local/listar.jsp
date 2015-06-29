@@ -16,9 +16,9 @@
 		<div id="logo"><img id="logod" src="<%=getServletContext().getContextPath() %>/resources/images/logo.png"></div>
 		<div id="menuar">
 			<ul>
-				<li><a href="<%=getServletContext().getContextPath() %>/inicio/producto/listado">Comida</a></li>
+				<li><a href="<%=getServletContext().getContextPath() %>/inicio/producto/listado?tipo=0">La Carta</a></li>
 				<li><a href="<%=getServletContext().getContextPath() %>/inicio/categoria/listado">Categorias</a></li>
-				<li><a href="<%=getServletContext().getContextPath() %>/inicio/local/listado">Locales</a></li>
+				<li><a href="<%=getServletContext().getContextPath() %>/inicio/local/listado?tipo=0">Locales</a></li>
 				<li><a href="<%=getServletContext().getContextPath() %>/inicio/usuario/listado">Usuarios</a></li>
 			</ul>
 			<div class="separar"></div>
@@ -31,7 +31,11 @@
 				<li><a href="<%=getServletContext().getContextPath() %>/inicio/login/cerrarsesion">Cerrar Sesión</a></li>
 				<li><a href="<%=getServletContext().getContextPath() %>/inicio/usuario/datos">Datos Usuario</a></li>
 				<li><a href="<%=getServletContext().getContextPath() %>/inicio/distrito/listado">Distritos</a></li>
-				
+				<li><div style=" color: #e09125; font-weight: bolder;">Locales-Distritos</div></li>
+				<c:forEach items="${distritos}" var="distrito">
+					<li><a style=" color: #e09125; font-weight: bolder;"href="<%=getServletContext().getContextPath() %>/inicio/local/listado?tipo=${distrito.id}">${distrito.ndistrito}</a></li>		
+									
+				</c:forEach>
 				<li></li>
 			</ul>
 		</div>
@@ -39,7 +43,8 @@
 			
 			
 			<h1> Lista de Locales </h1>
-			<h3><a href="<%=getServletContext().getContextPath() %>/inicio/local">Agregar Local</a></h3>
+			<p class="mensajeerror">${mensaje}</p>
+			<a class="btagregar" href="<%=getServletContext().getContextPath() %>/inicio/local">Agregar Local</a>
 			<table id="box-table-a">
 				<thead>
 					<tr>
@@ -55,19 +60,59 @@
 				<tbody>
 					<% int num=1; %>
 					<c:forEach items="${locales}" var="local">
+					<c:choose>
+									<c:when test="${local.distrito==tipo}">
 					<tr>
 						<td><%=num %></td>
 						<td>${local.nlocal}</td>
 						<td>${local.direccion}</td>
 						<td>${local.telefono}</td>
 						<td>${local.correo}</td>
-						<td>${local.distrito}</td>	
-						<td><a href="">Borrar</a></td>
-						<td><a href="">Editar</a></td>
+						<td>
+						<c:forEach items="${distritos}" var="distrito">
+							<c:choose>
+									<c:when test="${distrito.id==local.distrito}">
+									${distrito.ndistrito}
+									</c:when>
+								</c:choose>
+								
+							</c:forEach>
+						</td>	
+						<td><a href="<%=getServletContext().getContextPath() %>/inicio/local/borrar?id=${local.id}">Borrar</a></td>
+						<td><a href="<%=getServletContext().getContextPath() %>/inicio/local/editar?id=${local.id}">Editar</a></td>
 					</tr>
-					<% num=num+1; %>	
-					</c:forEach>
+					<% num=num+1; %>
+					</c:when>
 					
+					
+					<c:when test="${tipo==0}">
+					<tr>
+						<td><%=num %></td>
+						<td>${local.nlocal}</td>
+						<td>${local.direccion}</td>
+						<td>${local.telefono}</td>
+						<td>${local.correo}</td>
+						<td>
+						<c:forEach items="${distritos}" var="distrito">
+							
+									<c:choose>
+									<c:when test="${distrito.id==local.distrito}">
+									${distrito.ndistrito}
+									</c:when>
+								</c:choose>
+								
+							</c:forEach>
+						</td>	
+					
+				
+						<td><a href="<%=getServletContext().getContextPath() %>/inicio/local/borrar?id=${local.id}">Borrar</a></td>
+						<td><a href="<%=getServletContext().getContextPath() %>/inicio/local/editar?id=${local.id}">Editar</a></td>
+					</tr>
+					<% num=num+1; %>
+					</c:when>
+					
+					</c:choose>	
+					</c:forEach>
 					
 					
 				</tbody>

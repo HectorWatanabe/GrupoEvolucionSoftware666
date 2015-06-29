@@ -1,17 +1,25 @@
+<%@page import="java.util.ArrayList"%>
+<%@page import="pe.com.modelo.Distrito"%>
+<%@page import="java.util.Vector"%>
+<%@page import="pe.com.modelo.Local"%>
 <%@ page language="java" contentType="text/html; charset=ISO-8859-1"
     pageEncoding="ISO-8859-1"%>
 <%@ taglib uri="http://www.springframework.org/tags/form" prefix="form" %>
   <%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c" %>
   
 
+
+
 <!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
 <html>
 <head>
 <meta http-equiv="Content-Type" content="text/html; charset=ISO-8859-1">
-<title>Delicia's Ingresar Datos</title>
+<title>Delicia's Editar Datos</title>
 <link rel="stylesheet" type="text/css" href="<%=getServletContext().getContextPath() %>/resources/css/Layout1.css" />
 </head>
 
+<%  ArrayList<Distrito> distritos=(ArrayList<Distrito>)request.getAttribute("distritos"); %>
+<% Local local = (Local)request.getAttribute("local");%>
 
 <body>
 <div id="contenedor">
@@ -42,34 +50,42 @@
 			
 			
 				
-				<h2> Agregar Platillo</h2>
+				<h2> Editar Local</h2>
 			<p class="mensajeerror">${mensaje}</p>
-				<form:form action="producto" method="post">
+				<form:form action="editar" method="post">
 				<table>
 					<tr>
-						<td>Nombre del Producto:</td>
-						<td><form:input path="nproducto" /></td>
+					<%if(local!=null) {%>	<td><input type="hidden" name="id" value="<%=local.getId() %>"><%} %></td>
+						</tr>	
+					<tr>
+						<td>Nombre:</td>
+						<td><input type="text" name="nlocal" <%if(local!=null) {%>value="<%=local.getNlocal()%>" <%} %>/></td>
 					</tr>
 					<tr>
-						<td>Descripcion:</td>
-						<td><form:input path="descripcion" maxlength="200"/></td>
+						<td>Direccion:</td>
+						<td><input type="text" name="direccion" <%if(local!=null) {%>value="<%=local.getDireccion()%>"<%} %>/></td>
+					</tr>
+					<tr>
+						<td>Telefono:</td>
+						<td><input type="text" name="telefono" <%if(local!=null) {%>value="<%=local.getTelefono()%>"<%} %>/></td>
+					</tr>
+					<tr>
+						<td>Correo:</td>
+						<td><input type="text" name="correo" <%if(local!=null) {%>value="<%=local.getCorreo()%>"<%} %>/></td>
 					</tr>
 					<tr>
 						<td>Distrito:</td>
-						<td><form:select path="categoria_id">
-							<c:forEach items="${categorias}" var="categoria">
-							<form:option value="${categoria.id}">${categoria.ncategoria}</form:option>  
-							</c:forEach>
-			  			 	</form:select>
-			  			</td>
-					</tr>
-					<tr>
-						<td>Precio:</td>
-						<td><form:input path="precio" /></td>
+						<td><select name="distrito">
+							<%for(int i=0;i<distritos.size();i++) { 
+								%>
+							<option value="<%=distritos.get(i).getId()%>"><%=distritos.get(i).getNdistrito() %></option>
+							<%} %>
+						</select>
+			   			</td>
 					</tr>
 					
 					<tr>
-						<td colspan="2"><input type="submit" name="btnGuardar" value="Guardar Producto " /></td>
+						<td colspan="2"><input type="submit" name="btnGuardar" value="Editar Local" /></td>
 					</tr>
 				</table>
 				</form:form>		

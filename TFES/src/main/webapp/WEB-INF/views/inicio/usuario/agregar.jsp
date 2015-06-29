@@ -21,8 +21,8 @@
 		<div id="menuar">
 			<ul>
 				<li><a href="<%=getServletContext().getContextPath() %>/inicio/nosotros1">Nosotros</a></li>
-				<li><a href="<%=getServletContext().getContextPath() %>/inicio/local/listado1">Locales</a></li>
-				<li><a href="<%=getServletContext().getContextPath() %>/inicio/producto/listado1">La Carta</a></li>
+				<li><a href="<%=getServletContext().getContextPath() %>/inicio/local/listado1?tipo=0">Locales</a></li>
+				<li><a href="<%=getServletContext().getContextPath() %>/inicio/producto/listado1?tipo=0">La Carta</a></li>
 				<li><a href="<%=getServletContext().getContextPath() %>/inicio/producto/promo">Promociones</a></li>
 			</ul>
 			<div class="separar"></div>
@@ -43,31 +43,31 @@
 			
 				
 				<h2> Agregar Usuarios</h2>
-			
-				<form:form action="usuario/agregar" method="post">
+			<p class="mensajeerror">${mensaje}</p>
+				<form:form action="usuario" method="post">
 				<table>
 					<tr>
 						<td>Usuario:</td>
 						<td><form:input path="usuario" /></td>
 					</tr>
 					<tr>
-						<td>Nombre del Usuario:</td>
+						<td>Nombre:</td>
 						<td><form:input path="nusuario" /></td>
 					</tr>
 					<tr>
-						<td>Apellido del Usuario:</td>
+						<td>Apellido:</td>
 						<td><form:input path="ausuario" /></td>
 					</tr>
 					<tr>
-						<td>Clave:</td>
-						<td><form:password path="clave" maxlength="6"/></td>
+						<td>Contraseña:</td>
+						<td><form:password path="clave" maxlength="12"/></td>
 					</tr>
 					<tr>
-						<td>Nacimiento:</td>
-						<td><form:input path="nacimiento" /></td>
+						<td>Fecha de Nacimiento:(formato dd/mm/aaa)</td>
+						<td><form:input path="nacimiento" maxlength="10" /></td>
 					</tr>
 					<tr>
-						<td>Dni:</td>
+						<td>DNI:</td>
 						<td><form:input path="dni" maxlength="8" /></td>
 					</tr>
 					<tr>
@@ -76,11 +76,11 @@
 					</tr>
 					<tr>
 						<td>Telefono:</td>
-						<td><form:input path="telefono" maxlength="9" /></td>
+						<td><form:input path="telefono" maxlength="9"  /></td>
 					</tr>
 					
 					<tr>
-						<td colspan="2"><input type="submit" name="btnGuardar" value="Registro" /></td>
+						<td colspan="2"><input type="submit" name="btnGuardar" value="Crear Cuenta" /></td>
 					</tr>
 				</table>
 				</form:form>		

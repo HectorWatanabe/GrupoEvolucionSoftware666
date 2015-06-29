@@ -172,3 +172,13 @@ p{
 .mensajeerror{
 	color: red;
 }
+.btagregar{
+	color:#480500;
+	font-size:18px;
+	text-decoration:none;
+}
+.btagregar:hover {
+	color: #D8681D;
+	font-size:18px;
+	text-decoration:none;
+}
