@@ -1,8 +1,6 @@
-<%@page import="pe.com.modelo.Usuario"%>
 <%@ page language="java" contentType="text/html; charset=ISO-8859-1"
     pageEncoding="ISO-8859-1"%>
 <%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c" %>
-
 
 <!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
 <html>
@@ -17,7 +15,7 @@
 	<div id="cabecera">
 		<div id="logo"><img id="logod" src="<%=getServletContext().getContextPath() %>/resources/images/logo.png"></div>
 		<div id="menuar">
-			<ul>
+		<ul>
 			<li><a href="<%=getServletContext().getContextPath() %>/inicio/nosotros1">Nosotros</a></li>
 				<li><a href="<%=getServletContext().getContextPath() %>/inicio/local/listado1?tipo=0">Locales</a></li>
 				<li><a href="<%=getServletContext().getContextPath() %>/inicio/producto/listado1?tipo=0">La Carta</a></li>
@@ -32,69 +30,84 @@
 			<ul>
 				<li><a href="<%=getServletContext().getContextPath() %>/inicio/login/cerrarsesion">Cerrar Session</a></li>
 				<li><a href="<%=getServletContext().getContextPath() %>/inicio/usuario/datos">Dato Usuario</a></li>
-				<li><div style=" color: #e09125; font-weight: bolder;">La Carta-Categoria</div></li>
-				<c:forEach items="${categorias}" var="categoria">
-					<li><a style=" color: #e09125; font-weight: bolder;" href="<%=getServletContext().getContextPath() %>/inicio/producto/listado1?tipo=${categoria.id}">${categoria.ncategoria}</a></li>		
-									
-				</c:forEach>
+				<li><div style=" color: #e09125; font-weight: bolder;">Pedidos-Estados</div></li>
+				<li><a style=" color: #e09125; font-weight: bolder;"href="<%=getServletContext().getContextPath() %>/inicio/usuario/pedido?tipo=1">Pendiente</a></li>		
+				<li><a style=" color: #e09125; font-weight: bolder;"href="<%=getServletContext().getContextPath() %>/inicio/usuario/pedido?tipo=2">Listo</a></li>		
+				
 				<li></li>
 			</ul>
 		</div>
 		<div id="contenido">
 			
 			
-			<h1> Lista de Productos </h1>
+				<h1>Pedidos </h1>
+			<p class="mensajeerror">${mensaje}</p>
 			<table id="box-table-a">
 				<thead>
 					<tr>
-						<th>Producto</th>
-						<th>descripcion</th>
-						<th>Categoria</th>
-						<th>Precio</th>
+						<th>Pedido N°</th>
+						<th>Usuario</th>
+						<th>Estado</th>
 					</tr>
 				</thead>
 				<tbody>
-					
-					<c:forEach items="${productos}" var="producto">
+					<% int num=0; %>
+					<c:forEach items="${pedidos}" var="pedido" >
 					<c:choose>
-									<c:when test="${producto.categoria_id==tipo}">
+					<c:when test="${usuario.id==pedido.usuario_id}">
+					<c:choose>
+					<c:when test="${pedido.estado==tipo}">
 					<tr>
-						<td>${producto.nproducto}</td>
-						<td>${producto.descripcion}</td>
+						<td>${pedido.id}</td>
 						<td>
-						
-							<c:forEach items="${categorias}" var="categoria">
+							<c:forEach items="${usuarios}" var="usuario">
 							<c:choose>
-									<c:when test="${categoria.id==producto.categoria_id}">
-									${categoria.ncategoria}
+									<c:when test="${usuario.id==pedido.usuario_id}">
+									${usuario.usuario}
 									</c:when>
 								</c:choose>
-							</c:forEach>		
-						
+								
+							</c:forEach>
 						</td>
-						<td>${producto.precio}</td>
+						<td>  <c:choose>
+								<c:when test="${pedido.estado==1}">
+								Pendiente
+								</c:when>
+								<c:when test="${pedido.estado==2}">
+								Listo
+								</c:when>
+							</c:choose> </td>
+						
+						
 					</tr>
 					</c:when>
+					
+					
 					<c:when test="${tipo==0}">
 					<tr>
-						<td>${producto.nproducto}</td>
-						<td>${producto.descripcion}</td>
+						<td>${pedido.id}</td>
 						<td>
-						
-							<c:forEach items="${categorias}" var="categoria">
-									<c:choose>
-									<c:when test="${categoria.id==producto.categoria_id}">
-									${categoria.ncategoria}
+							<c:forEach items="${usuarios}" var="usuario">
+							<c:choose>
+									<c:when test="${usuario.id==pedido.usuario_id}">
+									${usuario.usuario}
 									</c:when>
 								</c:choose>
-							</c:forEach>		
-						
+								
+							</c:forEach>
 						</td>
-						<td>${producto.precio}</td>
+						<td>  <c:choose>
+								<c:when test="${pedido.estado==1}">
+								Pendiente
+								</c:when>
+								<c:when test="${pedido.estado==2}">
+								Listo
+								</c:when>
+							</c:choose> </td>
 					</tr>
 					</c:when>
-					
-					
+					</c:choose>
+					</c:when>
 					</c:choose>
 					</c:forEach>
 					
@@ -108,6 +121,7 @@
 			
 			
 			
+			
 		</div>
 		<div class="separar"></div>
 	</div>
@@ -116,3 +130,6 @@
 </div>
 </body>
 </html>
+
+
+

@@ -13,5 +13,6 @@ public interface DistritoDao {
 	public boolean borrar(String id);
 	public Distrito obtenerid(String id);
 	public boolean editar(Distrito distrito);
+	public Distrito obtenerdistrito(String ndistrito);
 
 }

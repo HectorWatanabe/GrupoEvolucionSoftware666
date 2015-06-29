@@ -21,5 +21,9 @@ public class DAO {
 	{
 		return new UsuarioDaoImpl();
 	}
+	public static PedidoDao getPedidoDao()
+	{
+		return new PedidoDaoImpl();
+	}
 
 }

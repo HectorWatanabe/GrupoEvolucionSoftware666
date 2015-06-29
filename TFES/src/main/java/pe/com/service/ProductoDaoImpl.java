@@ -22,10 +22,14 @@ public class ProductoDaoImpl implements ProductoDao{
 	public boolean agregar(Producto producto) {
 
 		boolean flag = false;
+		Producto pro=null;
+		pro=obtenerpro(producto.getNproducto());
+		int filas=0;
 		
-		int filas = jdbcTemp.update("insert into producto (nproducto,descripcion,categoria_id,precio) " +
+		if(pro==null){
+		filas = jdbcTemp.update("insert into producto (nproducto,descripcion,categoria_id,precio) " +
 				"values('"+producto.getNproducto()+"','"+producto.getDescripcion()+"','"+producto.getCategoria_id()+"','"+producto.getPrecio()+"')");
-		
+		}
 		if(filas == 1){
 			flag = true;
 		}
@@ -93,21 +97,48 @@ boolean flag=false;
 	public boolean editar(Producto producto) {
 	boolean flag = false;
 		
+		Producto pro=null;
+		pro=obtenerpro(producto.getNproducto());
+		int filas=0;
 		
-		
-		int filas = jdbcTemp.update("update producto "
+		if(pro==null){
+		filas = jdbcTemp.update("update producto "
 				+ " set nproducto='" + producto.getNproducto() + "',"
 				+ " descripcion='" + producto.getDescripcion() + "',"
 				+ " categoria_id='" + producto.getCategoria_id() + "',"
 				+ " precio='" + producto.getPrecio() + "'"
 				+ " where id=" + producto.getId() );
-
+		}
 		
 		if(filas==1){
 			flag = true;
 		}
 
 	return flag;
+	}
+	@Override
+	public Producto obtenerpro(String nproducto) {
+		
+		
+		return jdbcTemp.query("select * from producto where nproducto='"+nproducto+"'", new ResultSetExtractor<Producto>(){
+			public Producto extractData(ResultSet rs) throws SQLException,
+					DataAccessException {
+				
+				Producto producto = null;
+				while(rs.next()){
+					producto = new Producto();
+					producto.setId(rs.getInt("id"));
+					producto.setNproducto(rs.getString("nproducto"));
+					producto.setDescripcion(rs.getString("descripcion"));
+					producto.setCategoria_id(rs.getInt("categoria_id"));
+					producto.setPrecio(rs.getFloat("precio"));
+				}
+				return producto;
+			}
+		});
+		
+				
+				
 	}
 
 }

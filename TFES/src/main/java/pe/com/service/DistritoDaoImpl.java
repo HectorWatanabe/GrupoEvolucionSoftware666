@@ -23,10 +23,14 @@ public class DistritoDaoImpl implements DistritoDao{
 	public boolean agregar(Distrito distrito) {
 
 		boolean flag = false;
+		Distrito distr=null;
+		distr=obtenerdistrito(distrito.getNdistrito());
+		int filas=0;
 		
-		int filas = jdbcTemp.update("insert into distrito (ndistrito) " +
+		if(distr==null){
+		filas = jdbcTemp.update("insert into distrito (ndistrito) " +
 				"values('"+distrito.getNdistrito()+"')");
-		
+		}
 		if(filas == 1){
 			flag = true;
 		}
@@ -87,18 +91,37 @@ public class DistritoDaoImpl implements DistritoDao{
 	@Override
 	public boolean editar(Distrito distrito) {
 		boolean flag = false;
+		Distrito distr=null;
+		distr=obtenerdistrito(distrito.getNdistrito());
+		int filas=0;
 		
-		
-		
-		int filas = jdbcTemp.update("update distrito "
+		if(distr==null){
+		 filas = jdbcTemp.update("update distrito "
 				+ " set ndistrito='" + distrito.getNdistrito() + "'"
 				+ " where id=" + distrito.getId() );
-
+		}
 		
 		if(filas==1){
 			flag = true;
 		}
 
 	return flag;
+	}
+	
+	@Override
+	public Distrito obtenerdistrito(String ndistrito) {
+		return jdbcTemp.query("select * from distrito where ndistrito='"+ndistrito+"'", new ResultSetExtractor<Distrito>(){
+			public Distrito extractData(ResultSet rs) throws SQLException,
+					DataAccessException {
+				
+				Distrito distrito = null;
+				while(rs.next()){
+					distrito = new Distrito();
+					distrito.setId(rs.getInt("id"));
+					distrito.setNdistrito(rs.getString("ndistrito"));
+				}
+				return distrito;
+			}
+		});
 	}
 }

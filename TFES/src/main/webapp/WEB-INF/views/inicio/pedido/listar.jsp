@@ -17,7 +17,7 @@
 		<div id="menuar">
 		<ul>
 			<li><a href="<%=getServletContext().getContextPath() %>/inicio/nosotros1">Inicio</a></li>
-				<li><a href="<%=getServletContext().getContextPath() %>/inicio/pedido/listado">Pedidos</a></li>
+				<li><a href="<%=getServletContext().getContextPath() %>/inicio/pedido?tipo=0">Pedidos</a></li>
 			</ul>
 			<div class="separar"></div>
 		</div>
@@ -28,6 +28,9 @@
 			<ul>
 				<li><a href="<%=getServletContext().getContextPath() %>/inicio/login/cerrarsesion">Cerrar Sesión</a></li>
 				<li><a href="<%=getServletContext().getContextPath() %>/inicio/usuario/datos">Datos Usuario</a></li>
+				<li><div style=" color: #e09125; font-weight: bolder;">Pedidos-Estados</div></li>
+				<li><a style=" color: #e09125; font-weight: bolder;"href="<%=getServletContext().getContextPath() %>/inicio/pedido?tipo=1">Pendiente</a></li>		
+				<li><a style=" color: #e09125; font-weight: bolder;"href="<%=getServletContext().getContextPath() %>/inicio/pedido?tipo=2">Listo</a></li>		
 				
 				<li></li>
 			</ul>
@@ -35,19 +38,98 @@
 		<div id="contenido">
 			
 			
-			<h1> Lista de Pedidos </h1>
+				<h1> Lista de Pedidos </h1>
 			<p class="mensajeerror">${mensaje}</p>
 			<table id="box-table-a">
 				<thead>
 					<tr>
-						<th>N°</th>
-						<th>Pedido</th>
-						<th colspan="2">Opciones</th>
+						<th>Pedido N°</th>
+						<th>Usuario</th>
+						<th>Estado</th>
+						<th >Opcion</th>
 					</tr>
 				</thead>
-				
+				<tbody>
+					<% int num=0; %>
+					<c:forEach items="${pedidos}" var="pedido">
+					<c:choose>
+					<c:when test="${pedido.estado==tipo}">
+					<tr>
+						<td>${pedido.id}</td>
+						<td>
+							<c:forEach items="${usuarios}" var="usuario">
+							<c:choose>
+									<c:when test="${usuario.id==pedido.usuario_id}">
+									${usuario.usuario}
+									</c:when>
+								</c:choose>
+								
+							</c:forEach>
+						</td>
+						<td>  <c:choose>
+								<c:when test="${pedido.estado==1}">
+								Pendiente
+								</c:when>
+								<c:when test="${pedido.estado==2}">
+								Listo
+								</c:when>
+							</c:choose> </td>
+						<td>
+						<c:choose>
+								<c:when test="${pedido.estado==1}">
+								<a href="<%=getServletContext().getContextPath() %>/inicio/pedido/actualizar?id=${pedido.id}&tipo=${tipo}">Listo</a>
+								</c:when>
+								<c:when test="${pedido.estado==2}">
+								<a href="<%=getServletContext().getContextPath() %>/inicio/pedido/actualizar?id=${pedido.id}&tipo=${tipo}">Pendiente</a>
+								</c:when>
+							</c:choose>
+						
+					</tr>
+					</c:when>
+					
+					
+					<c:when test="${tipo==0}">
+					<tr>
+						<td>${pedido.id}</td>
+						<td>
+							<c:forEach items="${usuarios}" var="usuario">
+							<c:choose>
+									<c:when test="${usuario.id==pedido.usuario_id}">
+									${usuario.usuario}
+									</c:when>
+								</c:choose>
+								
+							</c:forEach>
+						</td>
+						<td>  <c:choose>
+								<c:when test="${pedido.estado==1}">
+								Pendiente
+								</c:when>
+								<c:when test="${pedido.estado==2}">
+								Listo
+								</c:when>
+							</c:choose> </td>
+						<td>
+						<c:choose>
+								<c:when test="${pedido.estado==1}">
+								<a href="<%=getServletContext().getContextPath() %>/inicio/pedido/actualizar?id=${pedido.id}&tipo=${tipo}">Listo</a>
+								</c:when>
+								<c:when test="${pedido.estado==2}">
+								<a href="<%=getServletContext().getContextPath() %>/inicio/pedido/actualizar?id=${pedido.id}&tipo=${tipo}">Pendiente</a>
+								</c:when>
+							</c:choose>
+						
+					</tr>
+					</c:when>
+					</c:choose>
+					</c:forEach>
+					
+					
+					
+				</tbody>
 			</table>
 					
+			
 			
 			
 			

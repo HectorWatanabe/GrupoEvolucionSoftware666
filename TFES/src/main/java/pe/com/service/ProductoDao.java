@@ -13,5 +13,6 @@ public interface ProductoDao {
 	public boolean borrar(String id);
 	public Producto obtenerid(String id);
 	public boolean editar(Producto producto);
+	public Producto obtenerpro(String nproducto);
 
 }

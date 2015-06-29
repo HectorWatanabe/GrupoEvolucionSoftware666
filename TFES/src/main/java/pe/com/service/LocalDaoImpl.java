@@ -22,10 +22,14 @@ public class LocalDaoImpl implements LocalDao{
 	public boolean agregar(Local local) {
 		
 		boolean flag = false;
+		Local loc=null;
+		loc=obtenerlocal(local.getNlocal());
 		
-		int filas = jdbcTemp.update("insert into local (nlocal,direccion,telefono,correo,distrito) " +
+		int filas=0;
+		if(loc==null){
+		filas = jdbcTemp.update("insert into local (nlocal,direccion,telefono,correo,distrito) " +
 				"values('"+local.getNlocal()+"','"+local.getDireccion()+"','"+local.getTelefono()+"','"+local.getCorreo()+"','"+local.getDistrito()+"')");
-		
+		}
 		if(filas == 1){
 			flag = true;
 		}
@@ -97,17 +101,19 @@ public class LocalDaoImpl implements LocalDao{
 	@Override
 	public boolean editar(Local local) {
 		boolean flag = false;
+		Local loc=null;
+		loc=obtenerlocal(local.getNlocal());
 		
-		
-		
-		int filas = jdbcTemp.update("update local "
+		int filas=0;
+		if(loc==null){
+		filas = jdbcTemp.update("update local "
 				+ " set nlocal='" + local.getNlocal() + "',"
 				+ " direccion='" + local.getDireccion() + "',"
 				+ " correo='" + local.getCorreo() + "',"
 				+ " telefono='" + local.getTelefono() + "',"
 				+ " distrito='" + local.getDistrito() + "'"
 				+ " where id=" + local.getId() );
-
+		}
 		
 		if(filas==1){
 			flag = true;
@@ -115,5 +121,25 @@ public class LocalDaoImpl implements LocalDao{
 
 	return flag;
 	}
-
+	@Override
+	public Local obtenerlocal(String nlocal) {
+		return jdbcTemp.query("select * from local where nlocal='"+nlocal+"'", new ResultSetExtractor<Local>(){
+			public Local extractData(ResultSet rs) throws SQLException,
+					DataAccessException {
+				
+				Local local = null;
+				while(rs.next()){
+					local = new Local();
+					local.setId(rs.getInt("id"));
+					local.setNlocal(rs.getString("nlocal"));
+					local.setDireccion(rs.getString("direccion"));
+					local.setTelefono(rs.getString("telefono"));
+					local.setCorreo(rs.getString("correo"));
+					local.setDistrito(rs.getInt("distrito"));
+					
+				}
+				return local;
+			}
+		});
+	}
 }

@@ -78,7 +78,7 @@
 						</td>
 						<td>${producto.precio}</td>
 						<td><a href="<%=getServletContext().getContextPath() %>/inicio/producto/borrar?id=${producto.id}">Borrar</a></td>
-						<td><a href="<%=getServletContext().getContextPath() %>/inicio/producto/editar?id=${producto.id}">Editar</a></td>
+						<td><a href="<%=getServletContext().getContextPath() %>/inicio/producto/editar?id=${producto.id}&tipo=${tipo}">Editar</a></td>
 					</tr>
 					</c:when>
 					<c:when test="${tipo==0}">
@@ -98,7 +98,7 @@
 						</td>
 						<td>${producto.precio}</td>
 						<td><a href="<%=getServletContext().getContextPath() %>/inicio/producto/borrar?id=${producto.id}">Borrar</a></td>
-						<td><a href="<%=getServletContext().getContextPath() %>/inicio/producto/editar?id=${producto.id}">Editar</a></td>
+						<td><a href="<%=getServletContext().getContextPath() %>/inicio/producto/editar?id=${producto.id}&tipo=${tipo}">Editar</a></td>
 					</tr>
 					</c:when>
 					

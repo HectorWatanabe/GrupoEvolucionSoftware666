@@ -41,4 +41,8 @@
 		class="pe.com.service.ProductoDaoImpl">
 		<property name="jdbcTemp" ref="iJdbcTemplate"></property>
 	</bean>
+	<bean id="iPedidoImpl" name="nPedidoImpl"
+		class="pe.com.service.PedidoDaoImpl">
+		<property name="jdbcTemp" ref="iJdbcTemplate"></property>
+	</bean>
 </beans>

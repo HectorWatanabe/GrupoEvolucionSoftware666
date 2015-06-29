@@ -55,11 +55,14 @@ private JdbcTemplate jdbcTemp;
 	public boolean agregar(Usuario usuario) {
 		
 		boolean flag = false;
-		
-		int filas = jdbcTemp.update("insert into usuario (usuario,nusuario,ausuario,clave,nacimiento,tipo,dni,direccion,telefono,estado) " +
+		Usuario user=null;
+		user=obtenerid(usuario.getUsuario());
+		int filas=0;
+		if(user==null){
+		 filas = jdbcTemp.update("insert into usuario (usuario,nusuario,ausuario,clave,nacimiento,tipo,dni,direccion,telefono,estado) " +
 				"values('"+usuario.getUsuario()+"','"+usuario.getNusuario()+"','"+usuario.getAusuario()+"','"+ MD5.crypt(usuario.getClave())+"',"
 						+ "'"+usuario.getNacimiento()+"','1','"+usuario.getDni()+"','"+usuario.getDireccion()+"','"+usuario.getTelefono()+"','1')");
-		
+		}
 		if(filas == 1){
 			flag = true;
 		}

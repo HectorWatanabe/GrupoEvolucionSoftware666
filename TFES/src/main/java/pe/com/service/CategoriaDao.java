@@ -12,4 +12,5 @@ public interface CategoriaDao {
 	public boolean borrar(String id);
 	public Categoria obtenerid(String id);
 	public boolean editar(Categoria categoria);
+	public Categoria obtenercat(String ncategoria);
 }

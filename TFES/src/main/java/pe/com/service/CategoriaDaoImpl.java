@@ -21,10 +21,13 @@ private JdbcTemplate jdbcTemp;
 	public boolean agregar(Categoria categoria) {
 		// TODO Auto-generated method stub
 	boolean flag = false;
-		
-		int filas = jdbcTemp.update("insert into categoria (ncategoria) " +
+	Categoria cat=null;
+	cat=obtenercat(categoria.getNcategoria());
+	int filas=0;
+	if(cat==null){
+		 filas = jdbcTemp.update("insert into categoria (ncategoria) " +
 				"values('"+categoria.getNcategoria()+"')");
-		
+	}
 		if(filas == 1){
 			flag = true;
 		}
@@ -68,12 +71,14 @@ private JdbcTemplate jdbcTemp;
 	public boolean editar(Categoria categoria) {
 			boolean flag = false;
 		
-	
-			
-			int filas = jdbcTemp.update("update categoria "
+			Categoria cat=null;
+			cat=obtenercat(categoria.getNcategoria());
+			int filas=0;
+			if(cat==null){
+			filas = jdbcTemp.update("update categoria "
 					+ " set ncategoria='" + categoria.getNcategoria() + "'"
 					+ " where id=" + categoria.getId() );
-
+			}
 			
 			if(filas==1){
 				flag = true;
@@ -85,6 +90,24 @@ private JdbcTemplate jdbcTemp;
 	public Categoria obtenerid(String id) {
 			
 		return jdbcTemp.query("select * from categoria where id='"+id+"'", new ResultSetExtractor<Categoria>(){
+			public Categoria extractData(ResultSet rs) throws SQLException,
+					DataAccessException {
+				
+				Categoria categoria = null;
+				while(rs.next()){
+					categoria = new Categoria();
+					categoria.setId(rs.getInt("id"));
+					categoria.setNcategoria(rs.getString("ncategoria"));
+				}
+				return categoria;
+			}
+		});
+	}
+	
+	@Override
+	public Categoria obtenercat(String ncategoria) {
+			
+		return jdbcTemp.query("select * from categoria where ncategoria='"+ncategoria+"'", new ResultSetExtractor<Categoria>(){
 			public Categoria extractData(ResultSet rs) throws SQLException,
 					DataAccessException {
 				

@@ -49,7 +49,7 @@ Producto producto = (Producto)request.getAttribute("producto");%>
 				
 				<h2> Editar Producto</h2>
 			<p class="mensajeerror">${mensaje}</p>
-				<form:form action="editar" method="post">
+				<form:form action="editar?tipo=${tipo }" method="post">
 				<table>
 					<tr>
 					<td><%if(producto!=null) {%><input type="hidden" name="id" value="<%=producto.getId() %>" ><%} %></td>

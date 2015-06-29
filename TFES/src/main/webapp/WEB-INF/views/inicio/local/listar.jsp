@@ -79,7 +79,7 @@
 							</c:forEach>
 						</td>	
 						<td><a href="<%=getServletContext().getContextPath() %>/inicio/local/borrar?id=${local.id}">Borrar</a></td>
-						<td><a href="<%=getServletContext().getContextPath() %>/inicio/local/editar?id=${local.id}">Editar</a></td>
+						<td><a href="<%=getServletContext().getContextPath() %>/inicio/local/editar?id=${local.id}&tipo=${tipo}">Editar</a></td>
 					</tr>
 					<% num=num+1; %>
 					</c:when>
@@ -106,7 +106,7 @@
 					
 				
 						<td><a href="<%=getServletContext().getContextPath() %>/inicio/local/borrar?id=${local.id}">Borrar</a></td>
-						<td><a href="<%=getServletContext().getContextPath() %>/inicio/local/editar?id=${local.id}">Editar</a></td>
+						<td><a href="<%=getServletContext().getContextPath() %>/inicio/local/editar?id=${local.id}&tipo=${tipo}">Editar</a></td>
 					</tr>
 					<% num=num+1; %>
 					</c:when>

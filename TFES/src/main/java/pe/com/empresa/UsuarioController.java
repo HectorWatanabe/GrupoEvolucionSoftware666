@@ -13,7 +13,10 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.servlet.ModelAndView;
 
+import pe.com.modelo.Pedido;
 import pe.com.modelo.Usuario;
+import pe.com.service.PedidoDao;
+import pe.com.service.PedidoDaoImpl;
 import pe.com.service.UsuarioDao;
 import pe.com.service.UsuarioDaoImpl;
 import pe.com.util.Fecha;
@@ -130,7 +133,7 @@ public class UsuarioController {
 							if(flag){
 								model.addAttribute("mensaje", "Usuario guardado");
 							}
-							else{model.addAttribute("mensaje", "Ocurrio un Error");}}}}
+							else{model.addAttribute("mensaje", "Ocurrio un Error, Usuario en uso");}}}}
 		
 		}
 		}
@@ -246,5 +249,39 @@ public class UsuarioController {
 			return "/inicio/Home";
 	}
 	
+	
+	
+	
+	@RequestMapping(value="/inicio/usuario/pedido", method= RequestMethod.GET)
+	public String listar(Model model,HttpServletRequest request){
+		String tipo =(String)request.getParameter("tipo");
+		model.addAttribute("tipo", tipo);
+		ApplicationContext context = new ClassPathXmlApplicationContext("SpringBean.xml");
+		PedidoDao pedidodao = (PedidoDaoImpl)context.getBean("iPedidoImpl");
+		UsuarioDao usuariodao = (UsuarioDaoImpl)context.getBean("iUsuarioImpl");
+		
+		List<Pedido> pedidos = pedidodao.listar();
+		List<Usuario> usuarios = usuariodao.listar();
+		model.addAttribute("pedidos", pedidos);
+		model.addAttribute("usuarios", usuarios);
+		Usuario user=(Usuario)request.getSession().getAttribute("usuario");
+		model.addAttribute("usuario",user);
+		if(request.getSession().getAttribute("usuario")!=null)
+		{
+		if(user.getTipo()==1)
+			{
+			return "/inicio/usuario/listarpedido";
+			}
+		if(user.getTipo()==2)
+		{
+			return "/inicio/homeadmin";
+		}
+		if(user.getTipo()==3)
+		{
+			return "/inicio/homecocinero";
+		}
+		}
+		return "/inicio/Home";
+	}
 
 }

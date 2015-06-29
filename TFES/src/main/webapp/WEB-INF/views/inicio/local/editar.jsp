@@ -20,6 +20,7 @@
 
 <%  ArrayList<Distrito> distritos=(ArrayList<Distrito>)request.getAttribute("distritos"); %>
 <% Local local = (Local)request.getAttribute("local");%>
+<% String tipo = (String)request.getAttribute("tipo");%>
 
 <body>
 <div id="contenedor">
@@ -52,7 +53,7 @@
 				
 				<h2> Editar Local</h2>
 			<p class="mensajeerror">${mensaje}</p>
-				<form:form action="editar" method="post">
+				<form:form action="editar?tipo=${tipo }" method="post">
 				<table>
 					<tr>
 					<%if(local!=null) {%>	<td><input type="hidden" name="id" value="<%=local.getId() %>"><%} %></td>

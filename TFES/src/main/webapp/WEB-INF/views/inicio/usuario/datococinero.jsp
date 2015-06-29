@@ -19,7 +19,7 @@
 		<div id="menuar">
 			<ul>
 			<li><a href="<%=getServletContext().getContextPath() %>/inicio/nosotros1">Inicio</a></li>
-				<li><a href="<%=getServletContext().getContextPath() %>/inicio/pedido/listado">Pedidos</a></li>
+				<li><a href="<%=getServletContext().getContextPath() %>/inicio/pedido">Pedidos</a></li>
 			</ul>
 			<div class="separar"></div>
 		</div>

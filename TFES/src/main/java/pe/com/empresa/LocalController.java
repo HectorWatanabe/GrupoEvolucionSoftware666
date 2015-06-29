@@ -175,7 +175,9 @@ public class LocalController {
 	
 	@RequestMapping(value="/inicio/local/editar", method= RequestMethod.GET)
 	public String editar( Model model,HttpServletRequest request){
-		
+
+		String tipo =(String)request.getParameter("tipo");
+		model.addAttribute("tipo", tipo);
 		ApplicationContext context = new ClassPathXmlApplicationContext("SpringBean.xml");
 		LocalDao localdao = (LocalDaoImpl)context.getBean("iLocalImpl");
 		DistritoDao distritodao = (DistritoDaoImpl)context.getBean("iDistritoImpl");	
@@ -205,7 +207,9 @@ public class LocalController {
 	
 	@RequestMapping(value="/inicio/local/editar", method= RequestMethod.POST)
 	public String editar2( Model model,HttpServletRequest request){
-		
+
+		String tipo =(String)request.getParameter("tipo");
+		model.addAttribute("tipo", tipo);
 		ApplicationContext context = new ClassPathXmlApplicationContext("SpringBean.xml");
 		LocalDao localdao = (LocalDaoImpl)context.getBean("iLocalImpl");
 		DistritoDao distritodao = (DistritoDaoImpl)context.getBean("iDistritoImpl");	

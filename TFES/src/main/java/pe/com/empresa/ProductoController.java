@@ -182,7 +182,8 @@ public class ProductoController {
 	
 	@RequestMapping(value="/inicio/producto/editar", method= RequestMethod.GET)
 	public String editar( Model model,HttpServletRequest request){
-		
+		String tipo =(String)request.getParameter("tipo");
+		model.addAttribute("tipo", tipo);
 		ApplicationContext context = new ClassPathXmlApplicationContext("SpringBean.xml");
 		ProductoDao productodao = (ProductoDaoImpl)context.getBean("iProductoImpl");
 		CategoriaDao categoriadao = (CategoriaDaoImpl)context.getBean("iCategoriaImpl");	
@@ -212,7 +213,8 @@ public class ProductoController {
 	
 	@RequestMapping(value="/inicio/producto/editar", method= RequestMethod.POST)
 	public String editar2( Model model,HttpServletRequest request){
-		
+		String tipo =(String)request.getParameter("tipo");
+		model.addAttribute("tipo", tipo);
 		ApplicationContext context = new ClassPathXmlApplicationContext("SpringBean.xml");
 		ProductoDao productodao = (ProductoDaoImpl)context.getBean("iProductoImpl");
 		CategoriaDao categoriadao = (CategoriaDaoImpl)context.getBean("iCategoriaImpl");	
