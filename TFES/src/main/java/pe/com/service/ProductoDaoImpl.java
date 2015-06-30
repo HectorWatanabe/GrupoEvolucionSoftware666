@@ -101,7 +101,7 @@ boolean flag=false;
 		pro=obtenerpro(producto.getNproducto());
 		int filas=0;
 		
-		if(pro==null){
+		if(pro==null||pro.getId()==producto.getId()){
 		filas = jdbcTemp.update("update producto "
 				+ " set nproducto='" + producto.getNproducto() + "',"
 				+ " descripcion='" + producto.getDescripcion() + "',"

@@ -183,6 +183,7 @@ public class LocalController {
 		DistritoDao distritodao = (DistritoDaoImpl)context.getBean("iDistritoImpl");	
 		List<Distrito> distritos = distritodao.listar();
 		model.addAttribute("distritos", distritos);
+		
 		String id =(String)request.getParameter("id");
 		Local local= localdao.obtenerid(id);
 		

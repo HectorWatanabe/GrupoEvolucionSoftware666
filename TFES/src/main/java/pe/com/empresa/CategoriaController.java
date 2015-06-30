@@ -43,11 +43,54 @@ public class CategoriaController {
 		
 		
 	}
-	
 	@RequestMapping(value="/inicio", method= RequestMethod.GET)
-	public ModelAndView inicio(){
-		
+	public ModelAndView inicio(Model model,HttpServletRequest request){
+		String tipo =request.getParameter("tipo");
+		Usuario user=(Usuario)request.getSession().getAttribute("usuario");
+		if(request.getSession().getAttribute("usuario")!=null)
+		{
+		if(user.getTipo()==1)
+			{
+
+			return new ModelAndView("inicio/homeuser", "command", new Categoria());
+			}
+		if(user.getTipo()==2)
+		{
+				
+		return new ModelAndView("inicio/homeadmin", "command", new Categoria());
+		}
+		if(user.getTipo()==3)
+		{
+		return new ModelAndView("inicio/homecocinero", "command", new Categoria());
+		}
+		}
 		return new ModelAndView("inicio/Home", "command", new Categoria());
+		
+	}
+	
+	@RequestMapping(value="/error", method= RequestMethod.GET)
+	public ModelAndView error(Model model,HttpServletRequest request){
+		String tipo =request.getParameter("tipo");
+		Usuario user=(Usuario)request.getSession().getAttribute("usuario");
+		if(request.getSession().getAttribute("usuario")!=null)
+		{
+		if(user.getTipo()==1)
+			{
+
+			return new ModelAndView("inicio/error404", "command", new Categoria());
+			}
+		if(user.getTipo()==2)
+		{
+				
+		return new ModelAndView("inicio/error404", "command", new Categoria());
+		}
+		if(user.getTipo()==3)
+		{
+		return new ModelAndView("inicio/error404", "command", new Categoria());
+		}
+		}
+		return new ModelAndView("inicio/error404", "command", new Categoria());
+		
 	}
 	
 	
@@ -186,6 +229,7 @@ public class CategoriaController {
 		if(flag){
 			model.addAttribute("mensaje", "Categoria editado");
 		}else{
+			model.addAttribute("categoria", categoria);
 			model.addAttribute("mensaje", "Ocurrió un error");
 		}}
 		
