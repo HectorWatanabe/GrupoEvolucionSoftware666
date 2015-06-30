@@ -10,6 +10,7 @@ import org.springframework.jdbc.core.JdbcTemplate;
 import org.springframework.jdbc.core.ResultSetExtractor;
 
 import pe.com.modelo.Distrito;
+import pe.com.modelo.Local;
 
 public class DistritoDaoImpl implements DistritoDao{
 
@@ -17,6 +18,29 @@ public class DistritoDaoImpl implements DistritoDao{
 	private JdbcTemplate jdbcTemp;
 	public void setJdbcTemp(JdbcTemplate jdbcTemp) {
 		this.jdbcTemp = jdbcTemp;
+	}
+	
+	@Override
+	public List<Local> listar2(String id) {
+		
+		return jdbcTemp.query("select * from local where distrito='"+id+"' ", new ResultSetExtractor<List<Local>>(){
+			public List<Local> extractData(ResultSet rs) throws SQLException,
+			DataAccessException {
+		List<Local> locales = new ArrayList<Local>();
+		Local local = null;
+		while(rs.next()){
+			local = new Local();
+			local.setId(rs.getInt("id"));
+			local.setNlocal(rs.getString("nlocal"));
+			local.setDireccion(rs.getString("direccion"));
+			local.setTelefono(rs.getString("telefono"));
+			local.setCorreo(rs.getString("correo"));
+			local.setDistrito(rs.getInt("distrito"));
+			locales.add(local);
+		}
+		return locales;
+	}
+});
 	}
 	
 	@Override
@@ -60,10 +84,13 @@ public class DistritoDaoImpl implements DistritoDao{
 	@Override
 	public boolean borrar(String id) {
 		boolean flag=false;
+		int filas=0;
+		List<Local> loc=null;
+		loc= listar2(id);
 		
-		
-		int filas = jdbcTemp.update("delete from distrito where id=" + id);
-		
+		if(loc.size()==0){
+		filas = jdbcTemp.update("delete from distrito where id=" + id);
+		}
 		
 		if(filas==1){
 			flag = true;
@@ -95,7 +122,7 @@ public class DistritoDaoImpl implements DistritoDao{
 		distr=obtenerdistrito(distrito.getNdistrito());
 		int filas=0;
 		
-		if(distr==null){
+		if(distr==null|| distr.getId()==distrito.getId()){
 		 filas = jdbcTemp.update("update distrito "
 				+ " set ndistrito='" + distrito.getNdistrito() + "'"
 				+ " where id=" + distrito.getId() );
@@ -124,4 +151,6 @@ public class DistritoDaoImpl implements DistritoDao{
 			}
 		});
 	}
+
+	
 }

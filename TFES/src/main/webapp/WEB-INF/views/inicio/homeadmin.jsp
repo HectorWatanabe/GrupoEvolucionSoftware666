@@ -6,13 +6,13 @@
 <head>
 <meta http-equiv="Content-Type" content="text/html; charset=ISO-8859-1">
 <title>Delicia's </title>
-<link rel="stylesheet" type="text/css" href="../resources/css/Layout1.css" />
+<link rel="stylesheet" type="text/css" href="<%=getServletContext().getContextPath() %>/resources/css/Layout1.css" />
 </head>
 <% Usuario user=(Usuario)request.getSession().getAttribute("usuario"); %>
 <body>
 <div id="contenedor">
 	<div id="cabecera">
-		<div id="logo"><img id="logod" src="../resources/images/logo.png"></div>
+		<div id="logo"><img id="logod" src="<%=getServletContext().getContextPath() %>/resources/images/logo.png"></div>
 		<div id="menuar">
 			<ul>
 				<li><a href="<%=getServletContext().getContextPath() %>/inicio/producto/listado?tipo=0">La Carta</a></li>

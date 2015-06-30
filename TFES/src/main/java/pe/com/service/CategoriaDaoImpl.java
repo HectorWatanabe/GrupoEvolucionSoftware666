@@ -10,6 +10,7 @@ import org.springframework.jdbc.core.JdbcTemplate;
 import org.springframework.jdbc.core.ResultSetExtractor;
 
 import pe.com.modelo.Categoria;
+import pe.com.modelo.Producto;
 
 public class CategoriaDaoImpl implements CategoriaDao {
 private JdbcTemplate jdbcTemp;
@@ -40,9 +41,13 @@ private JdbcTemplate jdbcTemp;
 		
 		boolean flag=false;
 			
+			List<Producto> pro =null;
+			pro= listar2(id);
+			int filas=0;
 			
-			int filas = jdbcTemp.update("delete from categoria where id=" + id);
-			
+			if(pro.size()==0){
+			filas = jdbcTemp.update("delete from categoria where id=" + id);
+			}
 			
 			if(filas==1){
 				flag = true;
@@ -74,7 +79,7 @@ private JdbcTemplate jdbcTemp;
 			Categoria cat=null;
 			cat=obtenercat(categoria.getNcategoria());
 			int filas=0;
-			if(cat==null){
+			if(cat==null||cat.getId()==categoria.getId()){
 			filas = jdbcTemp.update("update categoria "
 					+ " set ncategoria='" + categoria.getNcategoria() + "'"
 					+ " where id=" + categoria.getId() );
@@ -120,6 +125,26 @@ private JdbcTemplate jdbcTemp;
 				return categoria;
 			}
 		});
+	}
+	@Override
+	public List<Producto> listar2(String id) {
+		return jdbcTemp.query("select * from producto where categoria_id='"+id+"'", new ResultSetExtractor<List<Producto>>(){
+			public List<Producto> extractData(ResultSet rs) throws SQLException,
+			DataAccessException {
+		List<Producto> productos = new ArrayList<Producto>();
+		Producto producto = null;
+		while(rs.next()){
+			producto = new Producto();
+			producto.setId(rs.getInt("id"));
+			producto.setNproducto(rs.getString("nproducto"));
+			producto.setDescripcion(rs.getString("descripcion"));
+			producto.setCategoria_id(rs.getInt("categoria_id"));
+			producto.setPrecio(rs.getFloat("precio"));
+			productos.add(producto);
+		}
+		return productos;
+	}
+});
 	}
 	
 

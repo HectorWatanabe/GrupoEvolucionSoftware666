@@ -105,7 +105,7 @@ public class LocalDaoImpl implements LocalDao{
 		loc=obtenerlocal(local.getNlocal());
 		
 		int filas=0;
-		if(loc==null){
+		if(loc==null||local.getId()==loc.getId()){
 		filas = jdbcTemp.update("update local "
 				+ " set nlocal='" + local.getNlocal() + "',"
 				+ " direccion='" + local.getDireccion() + "',"
