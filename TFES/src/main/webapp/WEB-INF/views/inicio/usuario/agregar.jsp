@@ -63,7 +63,7 @@
 						<td><form:password path="clave" maxlength="12"/></td>
 					</tr>
 					<tr>
-						<td>Fecha de Nacimiento:(formato dd/mm/aaa)</td>
+						<td>Fecha de Nacimiento:(formato dd/mm/aaaa)</td>
 						<td><form:input path="nacimiento" maxlength="10" /></td>
 					</tr>
 					<tr>

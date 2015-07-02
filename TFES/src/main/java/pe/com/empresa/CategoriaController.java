@@ -38,6 +38,10 @@ public class CategoriaController {
 		{
 			return "/inicio/categoria/listar";
 		}
+		if(user.getTipo()==3)
+		{
+			return "/inicio/homecocinero";
+		}
 		}
 		return "/inicio/Home";
 		
@@ -46,6 +50,7 @@ public class CategoriaController {
 	@RequestMapping(value="/inicio", method= RequestMethod.GET)
 	public ModelAndView inicio(Model model,HttpServletRequest request){
 		String tipo =request.getParameter("tipo");
+		model.addAttribute("tipo", tipo);
 		Usuario user=(Usuario)request.getSession().getAttribute("usuario");
 		if(request.getSession().getAttribute("usuario")!=null)
 		{
@@ -71,6 +76,7 @@ public class CategoriaController {
 	@RequestMapping(value="/error", method= RequestMethod.GET)
 	public ModelAndView error(Model model,HttpServletRequest request){
 		String tipo =request.getParameter("tipo");
+		model.addAttribute("tipo", tipo);
 		Usuario user=(Usuario)request.getSession().getAttribute("usuario");
 		if(request.getSession().getAttribute("usuario")!=null)
 		{
@@ -108,6 +114,10 @@ public class CategoriaController {
 		{
 			return new ModelAndView("inicio/categoria/agregar", "command", new Categoria());
 		}
+		if(user.getTipo()==3)
+		{
+		return new ModelAndView("inicio/homecocinero", "command", new Categoria());
+		}
 		}
 		return new ModelAndView("/inicio/Home", "command",null);
 		
@@ -143,6 +153,10 @@ public class CategoriaController {
 			return new ModelAndView("inicio/categoria/agregar", "command",new Categoria());
 		
 		}
+		if(user.getTipo()==3)
+		{
+		return new ModelAndView("inicio/homecocinero", "command", new Categoria());
+		}
 		}
 		return new ModelAndView("/inicio/Home", "command",null);
 		}
@@ -176,6 +190,10 @@ public class CategoriaController {
 		{
 		return "inicio/categoria/listar";
 		}
+		if(user.getTipo()==3)
+		{
+			return "/inicio/homecocinero";
+		}
 		}
 			return "/inicio/Home";
 	}
@@ -204,6 +222,10 @@ public class CategoriaController {
 		if(user.getTipo()==2)
 		{
 		return "inicio/categoria/editar";
+		}
+		if(user.getTipo()==3)
+		{
+			return "/inicio/homecocinero";
 		}
 		}
 			return "/inicio/Home";
@@ -249,6 +271,10 @@ public class CategoriaController {
 				model.addAttribute("categorias", categorias);
 				return "inicio/categoria/listar";}else
 				{return "inicio/categoria/editar";}
+		}
+		if(user.getTipo()==3)
+		{
+			return "/inicio/homecocinero";
 		}
 		}
 			return "/inicio/Home";

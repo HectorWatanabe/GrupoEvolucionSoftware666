@@ -45,6 +45,10 @@ public class ProductoController {
 		{
 			return "/inicio/producto/listar";
 		}
+		if(user.getTipo()==3)
+		{
+			return "/inicio/homecocinero";
+		}
 		}
 		return "/inicio/Home";
 		
@@ -68,6 +72,14 @@ public class ProductoController {
 			{
 			return "/inicio/producto/listar2";
 			}
+		if(user.getTipo()==3)
+		{
+			return "/inicio/homecocinero";
+		}
+		if(user.getTipo()==2)
+		{
+			return "/inicio/homeadmin";
+		}
 		}
 			return "/inicio/producto/listar1";
 		
@@ -91,6 +103,10 @@ public class ProductoController {
 		if(user.getTipo()==2)
 		{
 			return new ModelAndView("inicio/producto/agregar", "command", new Producto());
+		}
+		if(user.getTipo()==3)
+		{
+		return new ModelAndView("/inicio/homecocinero", "command",null);
 		}
 		}
 		return new ModelAndView("/inicio/Home", "command",null);
@@ -138,13 +154,29 @@ public class ProductoController {
 			model.addAttribute("categorias", categorias);
 			return new ModelAndView("inicio/producto/agregar", "command", new Producto());
 		}
+		if(user.getTipo()==3)
+		{
+		return new ModelAndView("/inicio/homecocinero", "command",null);
+		}
 		}
 		return new ModelAndView("/inicio/Home", "command",null);
 	}
 	@RequestMapping(value="/inicio/producto/promo", method= RequestMethod.GET)
-	public ModelAndView promocion(Model model){
-
-		return new ModelAndView("inicio/producto/promociones", "command", null);
+	public ModelAndView promocion(Model model,HttpServletRequest request){
+		Usuario user=(Usuario)request.getSession().getAttribute("usuario");
+		if(user.getTipo()==1)
+		{
+		return new ModelAndView("/inicio/homeuser", "command",null);
+		}if(user.getTipo()==2)
+		{
+		return new ModelAndView("/inicio/homeadmin", "command",null);
+		}
+		if(user.getTipo()==3)
+		{
+		return new ModelAndView("/inicio/homecocinero", "command",null);
+		}else{
+		
+		return new ModelAndView("inicio/producto/promociones", "command", null);}
 	}
 	
 	
@@ -153,6 +185,11 @@ public class ProductoController {
 		
 		ApplicationContext context = new ClassPathXmlApplicationContext("SpringBean.xml");
 		ProductoDao productodao = (ProductoDaoImpl)context.getBean("iProductoImpl");
+		CategoriaDao categoriadao = (CategoriaDaoImpl)context.getBean("iCategoriaImpl");	
+		List<Categoria> categorias = categoriadao.listar();
+		model.addAttribute("categorias", categorias);
+		String tipo =request.getParameter("tipo");
+		model.addAttribute("tipo", tipo);
 		String id =(String)request.getParameter("id");
 		boolean flag = productodao.borrar(id);
 		List<Producto> productos = productodao.listar();
@@ -174,6 +211,10 @@ public class ProductoController {
 		if(user.getTipo()==2)
 		{
 		return "inicio/producto/listar";
+		}
+		if(user.getTipo()==3)
+		{
+			return "/inicio/homecocinero";
 		}
 		}
 			return "/inicio/Home";
@@ -206,6 +247,10 @@ public class ProductoController {
 		if(user.getTipo()==2)
 		{
 		return "inicio/producto/editar";
+		}
+		if(user.getTipo()==3)
+		{
+			return "/inicio/homecocinero";
 		}
 		}
 			return "/inicio/Home";
@@ -267,6 +312,10 @@ public class ProductoController {
 				model.addAttribute("productos", productos);
 				return "inicio/producto/listar";}else
 				{return "inicio/producto/editar";}
+		}
+		if(user.getTipo()==3)
+		{
+			return "/inicio/homecocinero";
 		}
 		}
 			return "/inicio/Home";

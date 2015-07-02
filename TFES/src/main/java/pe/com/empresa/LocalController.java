@@ -45,6 +45,10 @@ public class LocalController {
 		{
 			return "/inicio/local/listar";
 		}
+		if(user.getTipo()==3)
+		{
+			return "/inicio/homecocinero";
+		}
 		}
 		return "/inicio/Home";
 	}
@@ -69,6 +73,14 @@ public class LocalController {
 			{
 			return "/inicio/local/listar2";
 			}
+		if(user.getTipo()==2)
+		{
+			return "/inicio/homeadmin";
+		}
+		if(user.getTipo()==3)
+		{
+			return "/inicio/homecocinero";
+		}
 		}
 			return "/inicio/local/listar1";
 		
@@ -94,6 +106,10 @@ public class LocalController {
 		if(user.getTipo()==2)
 		{
 			return new ModelAndView("inicio/local/agregar", "command", new Local());
+		}
+		if(user.getTipo()==3)
+		{
+		return new ModelAndView("inicio/homecocinero", "command", new Local());
 		}
 		}
 		return new ModelAndView("/inicio/Home", "command",null);
@@ -137,7 +153,11 @@ public class LocalController {
 				List<Distrito> distritos = distritodao.listar();
 				model.addAttribute("distritos", distritos);
 			return new ModelAndView("inicio/local/agregar", "command", new Local());
-		}}
+		}
+			if(user.getTipo()==3)
+			{
+			return new ModelAndView("inicio/homecocinero", "command", new Local());
+			}}
 		return new ModelAndView("/inicio/Home", "command",null);
 	}
 	
@@ -146,6 +166,11 @@ public class LocalController {
 		
 		ApplicationContext context = new ClassPathXmlApplicationContext("SpringBean.xml");
 		LocalDao localdao = (LocalDaoImpl)context.getBean("iLocalImpl");
+		DistritoDao distritodao = (DistritoDaoImpl)context.getBean("iDistritoImpl");	
+		List<Distrito> distritos = distritodao.listar();
+		model.addAttribute("distritos", distritos);
+		String tipo =(String)request.getParameter("tipo");
+		model.addAttribute("tipo", tipo);
 		String id =(String)request.getParameter("id");
 		boolean flag = localdao.borrar(id);
 		List<Local> locales = localdao.listar();
@@ -166,7 +191,12 @@ public class LocalController {
 			}
 		if(user.getTipo()==2)
 		{
+			model.addAttribute("locales", locales);
 		return "inicio/local/listar";
+		}
+		if(user.getTipo()==3)
+		{
+			return "/inicio/homecocinero";
 		}
 		}
 			return "/inicio/Home";
@@ -201,6 +231,10 @@ public class LocalController {
 		if(user.getTipo()==2)
 		{
 		return "inicio/local/editar";
+		}
+		if(user.getTipo()==3)
+		{
+			return "/inicio/homecocinero";
 		}
 		}
 			return "/inicio/Home";
@@ -243,6 +277,8 @@ public class LocalController {
 				flag = localdao.editar(local);
 		
 		if(flag){
+			List<Local> locales = localdao.listar();
+			model.addAttribute("locales", locales);
 			model.addAttribute("mensaje", "Local Editado");
 		}else{
 			model.addAttribute("local", local);
@@ -267,7 +303,13 @@ public class LocalController {
 				List<Local> locales = localdao.listar();
 				model.addAttribute("locales", locales);
 				return "inicio/local/listar";}else
-				{return "inicio/local/editar";}
+				{List<Local> locales = localdao.listar();
+				model.addAttribute("locales", locales);
+					return "inicio/local/editar";}
+		}
+		if(user.getTipo()==3)
+		{
+			return "/inicio/homecocinero";
 		}
 		}
 			return "/inicio/Home";

@@ -12,6 +12,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.servlet.ModelAndView;
 
+import pe.com.modelo.Categoria;
 import pe.com.modelo.Distrito;
 import pe.com.modelo.Usuario;
 import pe.com.service.DistritoDao;
@@ -37,6 +38,10 @@ public class DistritoController {
 		if(user.getTipo()==2)
 		{
 			return "/inicio/distrito/listar";
+		}
+		if(user.getTipo()==3)
+		{
+			return "/inicio/homecocinero";
 		}
 		}
 		return "/inicio/Home";
@@ -69,6 +74,10 @@ public class DistritoController {
 		{
 		return "inicio/distrito/listar";
 		}
+		if(user.getTipo()==3)
+		{
+			return "/inicio/homecocinero";
+		}
 		}
 			return "/inicio/Home";
 	}
@@ -85,6 +94,10 @@ public class DistritoController {
 		{
 
 			return new ModelAndView("inicio/distrito/agregar", "command", new Distrito());
+		}
+		if(user.getTipo()==3)
+		{
+		return new ModelAndView("inicio/homecocinero", "command", new Categoria());
 		}
 		}
 		return new ModelAndView("/inicio/Home", "command",null);
@@ -120,6 +133,10 @@ public class DistritoController {
 		{
 			return new ModelAndView("inicio/distrito/agregar", "command", new Distrito());
 		}
+		if(user.getTipo()==3)
+		{
+		return new ModelAndView("inicio/homecocinero", "command", new Categoria());
+		}
 		}
 		return new ModelAndView("/inicio/Home", "command",null);
 	}
@@ -148,6 +165,10 @@ public class DistritoController {
 		if(user.getTipo()==2)
 		{
 		return "inicio/distrito/editar";
+		}
+		if(user.getTipo()==3)
+		{
+			return "/inicio/homecocinero";
 		}
 		}
 			return "/inicio/Home";
@@ -194,6 +215,10 @@ public class DistritoController {
 				model.addAttribute("distritos", distritos);
 				return "inicio/distrito/listar";}else
 				{return "inicio/distrito/editar";}
+		}
+		if(user.getTipo()==3)
+		{
+			return "/inicio/homecocinero";
 		}
 		}
 			return "/inicio/Home";

@@ -45,6 +45,7 @@
 			<h1> Lista de Locales </h1>
 			<p class="mensajeerror">${mensaje}</p>
 			<a class="btagregar" href="<%=getServletContext().getContextPath() %>/inicio/local">Agregar Local</a>
+			
 			<table id="box-table-a">
 				<thead>
 					<tr>
@@ -78,7 +79,7 @@
 								
 							</c:forEach>
 						</td>	
-						<td><a href="<%=getServletContext().getContextPath() %>/inicio/local/borrar?id=${local.id}">Borrar</a></td>
+						<td><a href="<%=getServletContext().getContextPath() %>/inicio/local/borrar?id=${local.id}&tipo=${tipo}">Borrar</a></td>
 						<td><a href="<%=getServletContext().getContextPath() %>/inicio/local/editar?id=${local.id}&tipo=${tipo}">Editar</a></td>
 					</tr>
 					<% num=num+1; %>
@@ -105,7 +106,7 @@
 						</td>	
 					
 				
-						<td><a href="<%=getServletContext().getContextPath() %>/inicio/local/borrar?id=${local.id}">Borrar</a></td>
+						<td><a href="<%=getServletContext().getContextPath() %>/inicio/local/borrar?id=${local.id}&tipo=${tipo}">Borrar</a></td>
 						<td><a href="<%=getServletContext().getContextPath() %>/inicio/local/editar?id=${local.id}&tipo=${tipo}">Editar</a></td>
 					</tr>
 					<% num=num+1; %>

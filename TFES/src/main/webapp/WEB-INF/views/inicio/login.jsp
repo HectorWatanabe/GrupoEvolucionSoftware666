@@ -46,7 +46,7 @@
 	</tr>
 	<tr>
 		<td>Clave:</td>
-		<td><form:password path="clave" maxlength="6"/></td>
+		<td><form:password path="clave" maxlength="15"/></td>
 	</tr>
 	</table>
 			

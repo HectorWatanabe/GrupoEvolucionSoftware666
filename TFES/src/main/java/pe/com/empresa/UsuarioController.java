@@ -150,6 +150,10 @@ public class UsuarioController {
 		{
 			return new ModelAndView("inicio/login", "command", null);
 		}
+		if(user.getTipo()==3)
+		{
+		return new ModelAndView("inicio/homecocinero", "command", null);
+		}
 		}
 		return new ModelAndView("/inicio/usuario/agregar", "command", new Usuario());
 		
@@ -244,6 +248,10 @@ public class UsuarioController {
 		if(user.getTipo()==2)
 		{
 		return "inicio/usuario/listar";
+		}
+		if(user.getTipo()==3)
+		{
+		return "/inicio/homecocinero";
 		}
 		}
 			return "/inicio/Home";

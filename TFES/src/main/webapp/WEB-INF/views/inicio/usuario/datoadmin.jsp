@@ -10,7 +10,6 @@
 <title>Delicia's </title>
 <link rel="stylesheet" type="text/css" href="<%=getServletContext().getContextPath() %>/resources/css/Layout1.css" />
 </head>
-
 <body>
 <div id="contenedor">
 	<div id="cabecera">

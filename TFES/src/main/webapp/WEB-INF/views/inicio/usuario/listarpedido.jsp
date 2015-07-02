@@ -1,3 +1,5 @@
+<%@page import="pe.com.modelo.Pedido"%>
+<%@page import="java.util.ArrayList"%>
 <%@ page language="java" contentType="text/html; charset=ISO-8859-1"
     pageEncoding="ISO-8859-1"%>
 <%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c" %>
@@ -38,10 +40,11 @@
 			</ul>
 		</div>
 		<div id="contenido">
-			
-			
+		
 				<h1>Pedidos </h1>
 			<p class="mensajeerror">${mensaje}</p>
+			
+			
 			<table id="box-table-a">
 				<thead>
 					<tr>
@@ -116,11 +119,7 @@
 				</tbody>
 			</table>
 					
-			
-			
-			
-			
-			
+	
 			
 		</div>
 		<div class="separar"></div>
