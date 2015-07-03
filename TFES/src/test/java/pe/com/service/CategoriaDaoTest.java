@@ -49,7 +49,7 @@ public class CategoriaDaoTest {
 	public void testProductoAgregar() {
 		int num=productodaoimpl.listar().size();
 		Producto producto= new Producto();
-		producto.setNproducto("prueba");
+		producto.setNproducto("pprueba");
 		producto.setDescripcion("descripcionrueba");
 		producto.setCategoria_id(2);
 		producto.setPrecio(23);
@@ -83,7 +83,7 @@ public class CategoriaDaoTest {
 	public void testxBorrarProducto() {
 		
 		int num=productodaoimpl.listar().size();
-		productodaoimpl.borrar("47");
+		productodaoimpl.borrar("48");
 		
 		assertEquals(num-1, productodaoimpl.listar().size());
 	}
@@ -94,7 +94,7 @@ public class CategoriaDaoTest {
 		
 		Producto producto= new Producto();
 		producto.setId(24);
-		producto.setNproducto("editado");
+		producto.setNproducto("editadop");
 		producto.setDescripcion("editado");
 		producto.setCategoria_id(1);
 		producto.setPrecio(66);
@@ -110,7 +110,7 @@ public class CategoriaDaoTest {
 	public void testLocalAgregar() {
 		int num=localdaoimpl.listar().size();
 		Local local= new Local();
-		local.setNlocal("localpru");
+		local.setNlocal("localp");
 		local.setDistrito(1);
 		local.setCorreo("correoprueba");
 		local.setDireccion("direccionprueba");
@@ -145,7 +145,7 @@ public class CategoriaDaoTest {
 	public void testxBorrarLocal() {
 		
 		int num=localdaoimpl.listar().size();
-		localdaoimpl.borrar("50");
+		localdaoimpl.borrar("51");
 		
 		assertEquals(num-1, localdaoimpl.listar().size());
 	}
@@ -156,7 +156,7 @@ public class CategoriaDaoTest {
 		
 		Local local= new Local();
 		local.setId(29);
-		local.setNlocal("editado");
+		local.setNlocal("editadop");
 		local.setCorreo("editado");
 		local.setDireccion("editado");
 		local.setDistrito(1);
@@ -172,7 +172,7 @@ public class CategoriaDaoTest {
 	public void testCategoriaAgregar() {
 		int num=categoriadaoimpl.listar().size();
 		Categoria categoria= new Categoria();
-		categoria.setNcategoria("CPrueba");
+		categoria.setNcategoria("Prueba");
 		categoriadaoimpl.agregar(categoria);
 
 		assertEquals(num+1, categoriadaoimpl.listar().size());
@@ -204,7 +204,7 @@ public class CategoriaDaoTest {
 	public void testxBorrarCategorial() {
 		
 		int num=categoriadaoimpl.listar().size();
-		categoriadaoimpl.borrar("52");
+		categoriadaoimpl.borrar("53");
 		
 		assertEquals(num-1, categoriadaoimpl.listar().size());
 	}
@@ -215,7 +215,7 @@ public class CategoriaDaoTest {
 		
 		Categoria categoria= new Categoria();
 		categoria.setId(2);
-		categoria.setNcategoria("editado");
+		categoria.setNcategoria("editadop");
 		
 	    boolean resulto=categoriadaoimpl.editar(categoria);
 		
@@ -227,7 +227,7 @@ public class CategoriaDaoTest {
 	public void testDistritoAgregar() {
 		int num=distritodaoimpl.listar().size();
 		Distrito distrito= new Distrito();
-		distrito.setNdistrito("Disprueba");
+		distrito.setNdistrito("prueba");
 		distritodaoimpl.agregar(distrito);
 		
 		assertEquals(num+1, distritodaoimpl.listar().size());
@@ -252,7 +252,7 @@ public class CategoriaDaoTest {
 	public void testxBorrarDistrito() {
 		
 		int num=distritodaoimpl.listar().size();
-		distritodaoimpl.borrar("51");
+		distritodaoimpl.borrar("52");
 		
 		assertEquals(num-1, distritodaoimpl.listar().size());
 	}
@@ -263,7 +263,7 @@ public class CategoriaDaoTest {
 		
 		Distrito distrito= new Distrito();
 		distrito.setId(24);
-		distrito.setNdistrito("DPrueba");
+		distrito.setNdistrito("DiPrueba");
 		
 	    boolean resulto=distritodaoimpl.editar(distrito);
 		
@@ -299,8 +299,8 @@ public class CategoriaDaoTest {
 	@Test
 	public void testUsuarioListar()
 	{
-		
-		assertEquals(13, usuariodaoimpl.listar().size());
+		int num=usuariodaoimpl.listar().size();
+		assertEquals(num, usuariodaoimpl.listar().size());
 	}
 	
 	
