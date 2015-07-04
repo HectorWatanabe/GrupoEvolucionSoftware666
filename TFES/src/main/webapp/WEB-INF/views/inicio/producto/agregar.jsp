@@ -55,7 +55,7 @@
 						<td><form:input path="descripcion" maxlength="200"/></td>
 					</tr>
 					<tr>
-						<td>Distrito:</td>
+						<td>Categoria:</td>
 						<td><form:select path="categoria_id">
 							<c:forEach items="${categorias}" var="categoria">
 							<form:option value="${categoria.id}">${categoria.ncategoria}</form:option>  

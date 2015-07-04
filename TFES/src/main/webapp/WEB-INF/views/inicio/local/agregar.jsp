@@ -44,7 +44,7 @@
 			
 			
 				
-				<h2> Agregar Agregar</h2>
+				<h2> Agregar Local</h2>
 			<p class="mensajeerror">${mensaje}</p>
 				<form:form action="local" method="post">
 				<table>
