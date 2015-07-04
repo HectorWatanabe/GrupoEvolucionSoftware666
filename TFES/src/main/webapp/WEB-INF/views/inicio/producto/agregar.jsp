@@ -42,7 +42,7 @@
 			
 			
 				
-				<h2> Agregar Platillo</h2>
+				<h2> Agregar Platillo </h2>
 			<p class="mensajeerror">${mensaje}</p>
 				<form:form action="producto" method="post">
 				<table>
